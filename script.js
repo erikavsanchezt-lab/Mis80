@@ -1,23 +1,32 @@
-// Cuenta regresiva
-const fechaEvento = new Date("Dec 06, 2025 00:00:00").getTime();
-setInterval(function () {
-    const hoy = new Date().getTime();
-    const distancia = fechaEvento - hoy;
+document.addEventListener('DOMContentLoaded', function() {
+    const animatedElements = document.querySelectorAll('[data-animation]');
 
-    const d = Math.floor(distancia / (1000 * 60 * 60 * 24));
-    const h = Math.floor((distancia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const m = Math.floor((distancia % (1000 * 60 * 60)) / (1000 * 60));
-    const s = Math.floor((distancia % (1000 * 60)) / 1000);
+    const observerOptions = {
+        root: null, // Observa el viewport
+        rootMargin: '0px',
+        threshold: 0.1 // Cuando el 10% del elemento es visible
+    };
 
-    document.getElementById("countdown").innerHTML = `${d} días ${h}h ${m}m ${s}s`;
-}, 1000);
+    const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                // Si el elemento es visible, añade la clase para activar la animación
+                entry.target.classList.add('is-visible');
+                // Deja de observar el elemento una vez que se ha animado
+                observer.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
 
-// Música autoplay manual por seguridad del navegador
-let music = document.getElementById("bgMusic");
-function toggleMusic() {
-  if (music.paused) {
-    music.play();
-  } else {
-    music.pause();
-  }
-}
+    animatedElements.forEach(element => {
+        // Añade una clase base para que todos los elementos animados estén ocultos inicialmente
+        element.classList.add('animated');
+        observer.observe(element);
+    });
+
+    // Animaciones para elementos con clases directas (ej. h1, h2, h3)
+    const directAnimatedElements = document.querySelectorAll('.fade-in-up');
+    directAnimatedElements.forEach(element => {
+        element.style.opacity = '0'; // Ocultar inicialmente para la animación CSS
+    });
+});
