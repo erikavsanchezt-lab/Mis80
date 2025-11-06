@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Invitación 80 Años - Flor María</title>
+
+<!-- Fuente elegante -->
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --green-dark: #4f6f52;
+  --green: #8ab17d;
+  --gold: #c2a878;
+  --cream: #faf6ea;
+  --white: #ffffff;
+}
+
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Montserrat', sans-serif;
+}
+
+body {
+  background: var(--cream);
+  color: var(--green-dark);
+  text-align: center;
+}
+
+/* Hero */
+.hero {
+  background: url('https://images.unsplash.com/photo-1501004318641-b39e6451bec6?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat;
+  min-height: 100vh;
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.hero h1 {
+  font-family: "Playfair Display", serif;
+  font-size: 3rem;
+  color: var(--white);
+  text-shadow: 0 4px 10px rgba(0,0,0,0.4);
+}
+
+.hero button {
+  background: var(--green-dark);
+  color: var(--white);
+  border: none;
+  padding: 15px 30px;
+  border-radius: 30px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  margin-top: 25px;
+}
+.section {
+  padding: 70px 20px;
+}
+
+/* Counter */
+#countdown {
+  font-size: 2rem;
+  color: var(--green-dark);
+  margin-top: 10px;
+}
+
+/* WhatsApp */
+.whatsapp-btn {
+  background: var(--green);
+  color: var(--white);
+  padding: 14px 30px;
+  border-radius: 30px;
+  text-decoration: none;
+  font-size: 1.2rem;
+  display:inline-block;
+  margin-top: 20px;
+}
+
+/* Gallery */
+.gallery {
+  display:grid;
+  grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+  gap: 10px;
+  padding: 20px;
+}
+.gallery img {
+  width:100%;
+  border-radius: 12px;
+}
+
+/* Footer */
+footer {
+  padding:30px;
+  font-size: .9rem;
+  color: var(--green-dark);
+}
+</style>
+</head>
+
+<body>
+
+<!-- Hero -->
+<div class="hero">
+  <h1>Flor María<br>80 Años</h1>
+  <button onclick="enterInvitation()">Entrar a la invitación</button>
+</div>
+
+<!-- Sound -->
+<audio id="bgMusic" loop>
+  <!-- 🔥 REEMPLAZAR POR LINK DE GOOGLE DRIVE -->
+  <source src="" type="audio/mpeg">
+</audio>
+
+<!-- Main -->
+<div id="main" style="display:none;">
+
+<section class="section">
+  <h2 style="font-family:Playfair Display;font-size:2.5rem;">Celebramos la vida</h2>
+  <p style="font-size:1.2rem;margin-top:10px;">Acompáñanos en el cumpleaños número 80 de nuestra querida Flor María 💛</p>
+</section>
+
+<section class="section">
+  <h3 style="font-family:Playfair Display;font-size:2rem;">Cuenta regresiva</h3>
+  <div id="countdown"></div>
+</section>
+
+<section class="section">
+  <h3 style="font-family:Playfair Display;font-size:2rem;">Ubicación</h3>
+  <p>Finca San Miguel</p>
+  <br>
+  <iframe 
+    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3969.3949333273124!2d-75.6838147!3d5.0679203!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e47799c77fb84e5%3A0x8d07f8d132cbb4e5!2sFinca%20San%20Miguel!5e0!3m2!1ses!2sco!4v00000000"
+    width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy">
+  </iframe>
+</section>
+
+<section class="section">
+  <h3 style="font-family:Playfair Display;font-size:2rem;">Confirma tu asistencia</h3>
+  <a class="whatsapp-btn"
+     href="https://wa.me/573117266064?text=Hola%2C+confirmo+mi+asistencia+al+cumplea%C3%B1os+80+de+Flor+Mar%C3%ADa"
+     target="_blank">Confirmar por WhatsApp</a>
+</section>
+
+<section class="section">
+  <h3 style="font-family:Playfair Display;font-size:2rem;">Recuerdos 💕</h3>
+  <div class="gallery">
+    <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=800&q=80">
+    <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=800&q=80">
+    <img src="https://images.unsplash.com/photo-1487412912498-0447578fcca8?auto=format&fit=crop&w=800&q=80">
+  </div>
+</section>
+
+<footer>Con cariño, su familia 💖</footer>
+</div>
+
+<script>
+// Music
+function enterInvitation(){
+  document.getElementsByClassName("hero")[0].style.display = "none";
+  document.getElementById("main").style.display = "block";
+  const music = document.getElementById("bgMusic");
+  music.play().catch(()=>{});
+}
+
+// Countdown
+var eventDate = new Date("Dec 06, 2025 19:00:00").getTime();
+setInterval(function(){
+  var now = new Date().getTime();
+  var diff = eventDate - now;
+  var d = Math.floor(diff / (1000*60*60*24));
+  var h = Math.floor((diff % (1000*60*60*24))/(1000*60*60));
+  var m = Math.floor((diff % (1000*60*60))/(1000*60));
+  document.getElementById("countdown").innerHTML =
+  d+" días "+h+"h "+m+"m";
+}, 1000);
+</script>
+
+</body>
+</html>
