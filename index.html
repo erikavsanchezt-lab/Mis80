@@ -1,72 +1,61 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Invitación Especial - ¡Celebra con Nosotros!</title>
-    
-    <link rel="stylesheet" href="style.css">
-    
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Celebración 80 años - Flor Maria</title>
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    
-    <header class="site-header">
-        <h1 class="fade-in-up">Una Invitación con el Corazón</h1>
-    </header>
 
-    <main class="content-container">
-        <section class="hero-section">
-            <h2 class="fade-in-up delay-1">¡Celebra la Vida y la Alegría!</h2>
-            <p data-animation="fade-in-up" class="delay-2">
-                Con inmensa felicidad y cariño, te invitamos a compartir un momento especial
-                para celebrar el cumpleaños de nuestra querida [Nombre de la Persona].
-                Un día para recordar, reír y crear nuevos y hermosos recuerdos.
-            </p>
-        </section>
+<audio id="bgMusic" loop>
+  <source src="music/MiViejita.mp3" type="audio/mpeg">
+</audio>
 
-        <section class="details-section">
-            <h3 class="fade-in-up delay-3">Detalles de la Celebración</h3>
-            <p data-animation="fade-in-up" class="delay-4">
-                <strong>Fecha:</strong> Sábado, 15 de Mayo de 2025
-            </p>
-            <p data-animation="fade-in-up" class="delay-5">
-                <strong>Hora:</strong> 19:00 hrs.
-            </p>
-            <p data-animation="fade-in-up" class="delay-6">
-                <strong>Lugar:</strong> Salón "El Jardín Secreto"
-                <br>Calle de las Rosas #123, Colonia Antigua, Ciudad Jardín.
-            </p>
-            <p data-animation="fade-in-up" class="delay-7">
-                Esperamos contar con tu grata presencia para hacer de este día
-                un evento inolvidable, lleno de amor y buenos deseos.
-            </p>
-        </section>
+<div class="music-btn" onclick="toggleMusic()">
+  🎵 Música
+</div>
 
-        <section class="rsvp-section">
-            <h3 class="fade-in-up delay-8">Confirma Tu Asistencia</h3>
-            <p data-animation="fade-in-up" class="delay-9">
-                Te agradeceríamos confirmar tu asistencia antes del 1 de Mayo.
-            </p>
-            <p data-animation="fade-in-up" class="delay-10">
-                Puedes contactar a [Tu Nombre] al [Tu Teléfono] o responder a este correo.
-            </p>
-            <a href="mailto:tucorreo@ejemplo.com?subject=Confirmación%20de%20asistencia%20-%20Cumpleaños%20de%20[Nombre]" class="button fade-in-up delay-11">Confirmar Asistencia</a>
-        </section>
+<section class="hero">
+    <div class="overlay"></div>
+    <div class="hero-content">
+        <img src="img/Abuelita.jpg" class="foto-principal" alt="Foto">
+        <h1>¡Te invitamos a celebrar la vida de una mujer extraordinaria!</h1>
+        <p>Amor, sabiduría y luz ✨</p>
+    </div>
+</section>
 
-        <section class="quote-section">
-            <p data-animation="fade-in-up" class="delay-12">
-                "Los años arrugan la piel, pero renunciar al entusiasmo arruga el alma."
-                <br>— Albert Schweitzer
-            </p>
-        </section>
-    </main>
+<section class="texto">
+<p>Son 80 años llenos de amor, enseñanzas, fortaleza y momentos inolvidables.</p>
+<p>Dios nos ha bendecido con una madre, abuela maravillosa, y hoy queremos honrar su historia, su dulzura y el amor que ha sembrado en cada corazón.</p>
+<p>¡Acompáñanos a celebrar esta hermosa bendición que la vida nos regala!</p>
+</section>
 
-    <footer class="site-footer">
-        <p>Con cariño, [Tu Familia / Tu Nombre]</p>
-        <p>&copy; 2025 Celebración de Vida. Todos los derechos reservados.</p>
-    </footer>
+<section class="especial">
+<p><strong>Pues los años no se cuentan, se celebran.</strong></p>
+<p>Los momentos no se guardan, se atesoran.</p>
+<p>¡Y la vida no solo se vive, sino que se agradece!</p>
+<p>Gracias por ser nuestro ejemplo, abrazo seguro e inspiración eterna.</p>
+</section>
 
-    <script src="script.js"></script>
+<section class="evento">
+    <h2>📅 Sábado 06 de Diciembre 2025</h2>
+    <p>📍 Finca San Miguel, Santagueda</p>
+
+    <button class="btn" onclick="window.open('https://wa.me/573117266064','_blank')">Confirmar Asistencia</button>
+    <button class="btn" onclick="window.open('https://www.google.com/maps/place/Finca+San+Miguel/@5.0679203,-75.6838147,17z','_blank')">Cómo llegar</button>
+</section>
+
+<section class="contador">
+<h3>El gran día se acerca ✨</h3>
+<div id="countdown"></div>
+</section>
+
+<footer>
+<p>¡Acompáñanos a brindar por ella! 🥂💖</p>
+</footer>
+
+<script src="script.js"></script>
+
 </body>
 </html>
