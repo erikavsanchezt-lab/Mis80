@@ -1,90 +1,92 @@
-/* BOTANICAL LUXURY INVITE - STYLE */
-
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500&display=swap');
-
 body {
   margin: 0;
   padding: 0;
-  font-family: 'Poppins', sans-serif;
-  background: #faf8f2;
-  color: #2f3e2e;
-  overflow-x: hidden;
-}
-
-/* Soft botanical background pattern */
-body::before {
-  content: "";
-  background: url("https://i.imgur.com/U4pFahS.png") center/cover no-repeat fixed;
-  opacity: 0.12;
-  top: 0; left: 0; bottom: 0; right: 0;
-  position: fixed;
-  z-index: -1;
-}
-
-section {
-  padding: 60px 20px;
+  font-family: "Georgia", serif;
+  background: #f7f8f5 url("https://i.imgur.com/hhA8F5D.png");
+  background-size: cover;
+  background-attachment: fixed;
   text-align: center;
-  max-width: 900px;
-  margin: auto;
+  color: #3a3a2e;
+  scroll-behavior: smooth;
 }
 
-h1, h2 {
-  font-family: 'Playfair Display', serif;
-  color: #2f3e2e;
+.hero {
+  padding: 50px 20px;
+}
+
+.photo {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  border: 6px solid #bfa878;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  object-fit: cover;
 }
 
 h1 {
-  font-size: 2.7rem;
-  line-height: 1.3;
+  font-size: 2.2rem;
+  color: #78653b;
+  margin-top: 15px;
 }
 
-p {
-  font-size: 1.15rem;
-  line-height: 1.8;
+.intro {
+  color: #5f6140;
+  font-size: 1.1rem;
+}
+
+.section, .quote, .event-card {
+  padding: 35px 20px;
+  margin: 20px;
+  background: rgba(255,255,255,0.75);
+  border-radius: 15px;
+  border: 1px solid #d9d6c8;
+}
+
+.quote {
+  font-style: italic;
+}
+
+.btn, .btn-outline {
+  display: block;
+  margin: 15px auto;
+  width: 80%;
+  padding: 15px;
+  border-radius: 40px;
+  font-size: 1.2rem;
+  text-decoration: none;
+}
+
+.btn {
+  background: #8c7a4f;
+  color: white;
+}
+
+.btn-outline {
+  border: 2px solid #8c7a4f;
+  color: #8c7a4f;
+}
+
+.countdown {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #78653b;
+  margin-top: 15px;
+}
+
+.footer {
+  padding: 40px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #78653b;
+}
+
+/* Animación */
+.fade-in {
   opacity: 0;
-  transform: translateY(20px);
-  animation: fadeUp 1.2s ease forwards;
+  transform: translateY(30px);
+  animation: fadeUp 1.2s forwards ease-out;
 }
 
 @keyframes fadeUp {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Photo styling */
-.hero-img {
-  width: 260px;
-  height: 260px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 6px solid #e1d8c7;
-  box-shadow: 0px 10px 25px rgba(0,0,0,0.12);
-  margin-bottom: 25px;
-}
-
-/* Buttons */
-.btn {
-  display: inline-block;
-  background: #7d9d72;
-  color: white;
-  padding: 14px 28px;
-  margin: 15px 10px;
-  border-radius: 35px;
-  text-decoration: none;
-  font-size: 1.1rem;
-  transition: 0.3s;
-}
-.btn:hover {
-  background: #637e5a;
-}
-
-/* Countdown */
-.countdown {
-  font-size: 2rem;
-  font-family: 'Playfair Display', serif;
-  margin-top: 20px;
-  font-weight: bold;
-  color: #4c6143;
+  to { opacity: 1; transform: translateY(0); }
 }
