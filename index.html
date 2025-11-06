@@ -1,84 +1,195 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Celebración 80 Años - Flor María</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>80 Años • Flor María</title>
 
-<!-- Fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Playfair+Display:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
 
 <style>
 body {
     margin: 0;
     font-family: 'Playfair Display', serif;
-    background: #f6f3ee;
-    color: #3c3b3a;
+    background: #f4f1ea url("https://i.imgur.com/6sGxM8u.jpg") repeat; /* papel fino */
+    color: #3b372f;
     text-align: center;
-    overflow-x: hidden;
 }
 
-/* Fondo botánico elegante */
-body::before {
-    content: "";
+/* Fondo botánico superior e inferior */
+.bg-top {
     position: fixed;
     top: 0; left: 0;
-    width: 100%; height: 100%;
-    background: url("https://raw.githubusercontent.com/erikavsanchezt-lab/Mis80/main/img/botanico.png");
-    background-size: cover;
-    background-position: center;
-    opacity: 0.22;
-    z-index: -1;
+    width: 100%;
+    height: 200px;
+    background: url("https://i.imgur.com/8M8cykI.png") center no-repeat;
+    background-size: contain;
+    opacity: .27;
+    pointer-events: none;
+}
+.bg-bottom {
+    position: fixed;
+    bottom: 0; left: 0;
+    width: 100%;
+    height: 200px;
+    background: url("https://i.imgur.com/8M8cykI.png") center no-repeat;
+    background-size: contain;
+    opacity: .27;
+    pointer-events: none;
+    transform: rotate(180deg);
 }
 
-/* Secciones */
-.section {
-    padding: 70px 20px;
-    animation: fadeIn 1.5s ease both;
+.section{
+    padding: 75px 20px;
+    animation: fade .9s ease both;
+}
+@keyframes fade{
+    from{opacity:0; transform:translateY(25px);}
+    to{opacity:1; transform:translateY(0);}
 }
 
-@keyframes fadeIn {
-    from {opacity: 0; transform: translateY(25px);}
-    to {opacity: 1; transform: translateY(0);}
+h1{
+    font-family: Cinzel, serif;
+    font-size: 2.9rem;
+    margin: 10px 0;
+    color:#4c4439;
 }
-
-/* Encabezado */
-h1 {
-    font-size: 2.8rem;
-    font-family: "Cinzel", serif;
-    color: #4a463e;
-    margin-bottom: 10px;
-}
-
-h2 {
+h2{
     font-size: 1.4rem;
-    font-weight: 500;
+    color:#635b50;
 }
 
-/* Foto */
-.hero-img {
-    width: 260px;
-    height: 260px;
-    object-fit: cover;
-    border-radius: 50%;
-    border: 6px solid #d9c9a3;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.15);
-    margin-bottom: 20px;
+.hero-img{
+    width:260px;
+    height:260px;
+    object-fit:cover;
+    border-radius:50%;
+    border:6px solid #d5c6a3;
+    box-shadow:0 10px 20px rgba(0,0,0,.15);
+    margin:20px;
 }
 
-/* Texto */
-p {
-    max-width: 650px;
-    margin: 15px auto;
-    line-height: 1.7;
-    font-size: 1.15rem;
+p{
+    max-width:700px;
+    margin: auto;
+    font-size:1.15rem;
+    line-height:1.75;
 }
 
 /* Botones */
-.btn {
-    display: inline-block;
-    background: #cab894;
-    color: #fff;
-    padding: 14px 28px;
-    border-radius: 40px;
-    text-decoration: none;
+.btn{
+    display:inline-block;
+    background:#c5b18a;
+    color:white;
+    padding:15px 32px;
+    border-radius:40px;
+    font-size:1.15rem;
+    text-decoration:none;
+    margin:10px;
+    transition:.3s;
+}
+.btn:hover{
+    background:#b29d77;
+}
+
+/* Countdown */
+.countdown{
+    font-size:2rem;
+    font-weight:bold;
+    margin:20px 0;
+}
+
+/* Música botón */
+#audioBtn{
+    position:fixed;
+    bottom:15px;
+    right:15px;
+    background:#c5b18a;
+    color:white;
+    padding:18px;
+    border-radius:50%;
+    border:none;
+    cursor:pointer;
+    font-size:20px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="bg-top"></div>
+<div class="bg-bottom"></div>
+
+<!-- Música -->
+<audio id="bgMusic" loop autoplay>
+<source src="https://raw.githubusercontent.com/erikavsanchezt-lab/Mis80/main/music/MiViejita.mp3" type="audio/mpeg">
+</audio>
+<button id="audioBtn">🎵</button>
+
+<!-- Hero -->
+<section class="section">
+<h2>Una vida llena de amor, sabiduría y luz</h2>
+<h1>Flor María</h1>
+<img class="hero-img" src="https://raw.githubusercontent.com/erikavsanchezt-lab/Mis80/main/img/Abuelita.jpg">
+<p><i>“Celebramos a una mujer extraordinaria que ha iluminado nuestras vidas.”</i></p>
+</section>
+
+<!-- Texto -->
+<section class="section">
+<p>Son 80 años llenos de amor, enseñanzas, fortaleza y momentos inolvidables.</p>
+<p>Dios nos ha bendecido con una madre y abuela maravillosa. Hoy queremos honrar su historia, su dulzura y el amor que ha sembrado en cada corazón.</p>
+<p>¡Acompáñanos a celebrar esta hermosa bendición que la vida nos regala!</p>
+</section>
+
+<!-- Mensaje especial -->
+<section class="section">
+<h2>Mensaje Especial</h2>
+<p>Los años no se cuentan, ¡se celebran!</p>
+<p>Los momentos no se guardan, se atesoran.</p>
+<p>Gracias madre y abuelita, por ser nuestro ejemplo e inspiración.</p>
+</section>
+
+<!-- Evento -->
+<section class="section">
+<h2>Detalles del evento</h2>
+<div style="font-size:1.4rem;font-weight:bold;margin:10px 0;">📅 Sábado, 06 Diciembre 2025</div>
+<p>📍 Finca San Miguel, Santagueda</p>
+
+<a class="btn" target="_blank"
+href="https://wa.me/573117266064?text=Confirmo%20mi%20asistencia%20a%20los%2080%20años%20de%20Flor%20María">
+Confirmar asistencia
+</a>
+
+<a class="btn" target="_blank"
+href="https://www.google.com/maps/place/Finca+San+Miguel/@5.0679203,-75.6838147,17z">
+Cómo llegar
+</a>
+</section>
+
+<!-- Cuenta regresiva -->
+<section class="section">
+<h2>¡El gran día se acerca!</h2>
+<div class="countdown" id="countdown"></div>
+<p>Estamos felices de compartir este momento tan especial contigo.</p>
+</section>
+
+<section class="section">
+<h2>¡Acompáñanos a brindar por ella!</h2>
+</section>
+
+
+<script>
+const music = document.getElementById("bgMusic");
+document.getElementById("audioBtn").onclick = () => music.paused ? music.play() : music.pause();
+
+/* Countdown */
+const eventDate = new Date("Dec 6, 2025 00:00:00").getTime();
+setInterval(()=>{
+ let now = new Date().getTime();
+ let diff = eventDate - now;
+ let d = Math.floor(diff/(1000*60*60*24));
+ document.getElementById("countdown").textContent = d + " días";
+},1000);
+</script>
+</body>
+</html>
