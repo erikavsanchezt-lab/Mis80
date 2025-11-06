@@ -3,59 +3,59 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Celebración 80 años - Flor Maria</title>
+<title>Celebración 80 Años</title>
 <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
 
-<audio id="bgMusic" loop>
+<audio id="music" loop>
   <source src="music/MiViejita.mp3" type="audio/mpeg">
 </audio>
 
-<div class="music-btn" onclick="toggleMusic()">
-  🎵 Música
+<div class="container fade-in">
+    <h1 class="title">Celebrando los 80 Años</h1>
+    <h2 class="subtitle">De Nuestra Querida Abuelita</h2>
+
+    <img class="photo bounce-in" src="img/Abuelita.jpg" alt="Foto Abuelita">
+
+    <p class="phrase slide-up">
+        Gracias por tu amor, tu dulzura y tu ejemplo.
+        Cada año contigo ha sido un regalo para nuestras vidas.
+    </p>
+
+    <div class="details fade-in-late">
+        🎉 <strong>Fecha:</strong> 16 de Noviembre 2025 <br>
+        🕓 <strong>Hora:</strong> 4:00 PM <br>
+        📍 <strong>Lugar:</strong> Casa de la Familia
+    </div>
+
+    <button id="playBtn" class="music-btn">🎵 Reproducir música</button>
 </div>
 
-<section class="hero">
-    <div class="overlay"></div>
-    <div class="hero-content">
-        <img src="img/Abuelita.jpg" class="foto-principal" alt="Foto">
-        <h1>¡Te invitamos a celebrar la vida de una mujer extraordinaria!</h1>
-        <p>Amor, sabiduría y luz ✨</p>
-    </div>
-</section>
+<script>
+const audio = document.getElementById("music");
+const btn = document.getElementById("playBtn");
 
-<section class="texto">
-<p>Son 80 años llenos de amor, enseñanzas, fortaleza y momentos inolvidables.</p>
-<p>Dios nos ha bendecido con una madre, abuela maravillosa, y hoy queremos honrar su historia, su dulzura y el amor que ha sembrado en cada corazón.</p>
-<p>¡Acompáñanos a celebrar esta hermosa bendición que la vida nos regala!</p>
-</section>
+function tryPlayMusic() {
+  audio.play().then(() => {
+      btn.style.display = "none"; 
+  }).catch(() => {
+      // Si el navegador bloquea autoplay, esperamos un click
+      document.addEventListener("click", () => {
+          audio.play();
+          btn.style.display = "none";
+      }, { once: true });
+  });
+}
 
-<section class="especial">
-<p><strong>Pues los años no se cuentan, se celebran.</strong></p>
-<p>Los momentos no se guardan, se atesoran.</p>
-<p>¡Y la vida no solo se vive, sino que se agradece!</p>
-<p>Gracias por ser nuestro ejemplo, abrazo seguro e inspiración eterna.</p>
-</section>
+window.addEventListener("load", tryPlayMusic);
 
-<section class="evento">
-    <h2>📅 Sábado 06 de Diciembre 2025</h2>
-    <p>📍 Finca San Miguel, Santagueda</p>
-
-    <button class="btn" onclick="window.open('https://wa.me/573117266064','_blank')">Confirmar Asistencia</button>
-    <button class="btn" onclick="window.open('https://www.google.com/maps/place/Finca+San+Miguel/@5.0679203,-75.6838147,17z','_blank')">Cómo llegar</button>
-</section>
-
-<section class="contador">
-<h3>El gran día se acerca ✨</h3>
-<div id="countdown"></div>
-</section>
-
-<footer>
-<p>¡Acompáñanos a brindar por ella! 🥂💖</p>
-</footer>
-
-<script src="script.js"></script>
+btn.addEventListener("click", () => {
+    audio.play();
+    btn.style.display = "none";
+});
+</script>
 
 </body>
 </html>
