@@ -1,97 +1,92 @@
-/* Fondo botánico */
 body {
-    margin: 0;
-    padding: 0;
-    font-family: "Georgia", serif;
-    background: url("img/fondo-botanico.jpg") no-repeat center center fixed;
-    background-size: cover;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    min-height: 100vh;
-    text-align: center;
-    padding: 30px 0;
+  margin: 0;
+  padding: 0;
+  font-family: "Georgia", serif;
+  background: #f7f8f5 url("https://i.imgur.com/hhA8F5D.png");
+  background-size: cover;
+  background-attachment: fixed;
+  text-align: center;
+  color: #3a3a2e;
+  scroll-behavior: smooth;
 }
 
-/* Contenedor elegante */
-.container {
-    background: rgba(255,255,255,0.90);
-    width: 85%;
-    max-width: 600px;
-    padding: 25px;
-    border-radius: 18px;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.2);
-    backdrop-filter: blur(10px);
-    animation: fadeIn 2s ease;
+.hero {
+  padding: 50px 20px;
 }
 
-/* Títulos */
-.title {
-    font-size: 2.7rem;
-    color: #4a5a3f;
-    margin-bottom: 8px;
-    font-family: "Playfair Display", serif;
-}
-
-.subtitle {
-    font-size: 1.4rem;
-    color: #6e7c61;
-    margin-bottom: 20px;
-}
-
-/* Foto */
 .photo {
-    width: 70%;
-    border-radius: 15px;
-    margin-bottom: 20px;
-    box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  border: 6px solid #bfa878;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  object-fit: cover;
 }
 
-/* Frase */
-.phrase {
-    font-size: 1.2rem;
-    font-style: italic;
-    color: #4a4a4a;
-    margin-bottom: 25px;
+h1 {
+  font-size: 2.2rem;
+  color: #78653b;
+  margin-top: 15px;
 }
 
-/* Detalles */
-.details {
-    font-size: 1.1rem;
-    color: #2f3b29;
-    margin-bottom: 20px;
+.intro {
+  color: #5f6140;
+  font-size: 1.1rem;
 }
 
-/* Botón música */
-.music-btn {
-    background: #6a8c5d;
-    color: white;
-    border: none;
-    padding: 14px 25px;
-    font-size: 1.1rem;
-    border-radius: 30px;
-    cursor: pointer;
-    transition: transform .2s;
-}
-.music-btn:hover {
-    transform: scale(1.05);
+.section, .quote, .event-card {
+  padding: 35px 20px;
+  margin: 20px;
+  background: rgba(255,255,255,0.75);
+  border-radius: 15px;
+  border: 1px solid #d9d6c8;
 }
 
-/* Animaciones */
-.fade-in { animation: fadeIn 1.5s ease forwards; }
-.fade-in-late { animation: fadeIn 2.5s ease forwards; }
-.slide-up { animation: slideUp 1.5s ease; }
-.bounce-in { animation: bounceIn 1.3s ease; }
+.quote {
+  font-style: italic;
+}
 
-@keyframes fadeIn {
-  from {opacity:0;} to {opacity:1;}
+.btn, .btn-outline {
+  display: block;
+  margin: 15px auto;
+  width: 80%;
+  padding: 15px;
+  border-radius: 40px;
+  font-size: 1.2rem;
+  text-decoration: none;
 }
-@keyframes slideUp {
-  from {opacity:0; transform:translateY(20px);} 
-  to {opacity:1; transform:translateY(0);}
+
+.btn {
+  background: #8c7a4f;
+  color: white;
 }
-@keyframes bounceIn {
-  0% {transform:scale(.7); opacity:0;}
-  70% {transform:scale(1.1);}
-  100% {transform:scale(1); opacity:1;}
+
+.btn-outline {
+  border: 2px solid #8c7a4f;
+  color: #8c7a4f;
+}
+
+.countdown {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #78653b;
+  margin-top: 15px;
+}
+
+.footer {
+  padding: 40px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #78653b;
+}
+
+/* Animación */
+.fade-in {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeUp 1.2s forwards ease-out;
+}
+
+@keyframes fadeUp {
+  to { opacity: 1; transform: translateY(0); }
 }
