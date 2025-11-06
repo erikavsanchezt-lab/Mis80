@@ -17,19 +17,32 @@
     --texto:#333331; /* Texto oscuro */
   }
   
-  /* Estilos generales */
-  html,body{height:100%;margin:0;background:var(--crema);color:var(--texto);font-family:Montserrat, "Montserrat", system-ui, sans-serif;}
-  
-  /* Contenedor principal con estilo de papel antiguo */
-  .wrap{
-    max-width:980px;margin:24px auto;padding:28px;
-    background:rgba(255,255,255,0.9);
-    border-radius:14px;
-    box-shadow:0 10px 30px rgba(20,20,20,0.08);
-    position:relative;
-    overflow:hidden;
+  /* -------------------------------------- */
+  /* ESTILOS VERTICALES TIPO STORY (Móvil First) */
+  /* -------------------------------------- */
+  html,body{
+    height:100%;margin:0;
+    background-color: var(--crema); /* Fondo global */
+    color:var(--texto);
+    font-family:Montserrat, "Montserrat", system-ui, sans-serif;
+    overflow-x: hidden; /* Evitar scroll horizontal */
   }
   
+  /* Wrap: Contenedor Vertical Estrecho */
+  .wrap{
+    max-width: 420px; /* Ancho típico de story/móvil */
+    min-height: 100vh; /* Ocupa toda la altura de la pantalla */
+    margin:0 auto; /* Centrar */
+    padding: 0; /* Quitar padding global para centrar contenido */
+    background-color: rgba(255,255,255,0.9);
+    box-shadow:0 0 20px rgba(20,20,20,0.1); /* Sombra ligera */
+    position:relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 0; /* Bordes rectos para pantalla completa */
+  }
+
   /* Fondo botánico sutil */
   .botanic {
     pointer-events:none;
@@ -41,79 +54,92 @@
     mix-blend-mode:multiply;
   }
 
-  header {text-align:center;padding:8px 12px 18px;}
-  h1{font-family:'Playfair Display', serif; font-size:34px; margin:6px 0; color:var(--verde-oscuro);}
-  .lead{color:#6b695f;margin-top:6px;font-size:16px;}
+  header {text-align:center;padding:25px 20px 10px;}
+  h1{font-family:'Playfair Display', serif; font-size:28px; margin:6px 0; color:var(--verde-oscuro);}
+  .lead{color:#6b695f;margin-top:6px;font-size:14px;font-style:italic;}
 
   /* hero photo */
-  .photo-wrap{display:flex;justify-content:center;margin-top:6px}
+  .photo-wrap{display:flex;justify-content:center;margin:15px 0;}
   .photo{
-    width:300px;height:300px;border-radius:16px;object-fit:cover;
+    width:260px;height:260px;border-radius:16px;object-fit:cover;
     border:6px solid #fff;
-    box-shadow:0 10px 30px rgba(0,0,0,0.12);
-    /* Animación inicial sutil */
+    box-shadow:0 10px 30px rgba(0,0,0,0.15);
+    /* Animación inicial */
     opacity:0;
-    transform:translateY(10px);
-    animation:fadeUp .6s forwards;
+    transform:scale(0.8);
+    animation:scaleIn .8s forwards ease-out;
     animation-delay:0.1s;
     transition:transform .6s cubic-bezier(.2,.9,.3,1);
   }
-  .photo:hover{transform:translateY(-6px) scale(1.01);}
+  @keyframes scaleIn { to {opacity:1; transform:scale(1);} }
 
-  /* content columns */
-  .content{display:grid;grid-template-columns: 1fr 360px;gap:22px;margin-top:22px;align-items:start;}
-  @media(max-width:900px){ .content{grid-template-columns:1fr;padding:0 10px;} .photo{width:220px;height:220px;} }
-
-  /* left column: Animaciones de Párrafos */
-  .card{background:transparent;padding:10px 6px;}
-  .section-title{font-family:'Playfair Display', serif;color:var(--verde-oliva);font-size:20px;margin-bottom:8px;}
+  /* Content: Una sola columna */
+  .content{
+    display:block; 
+    width: 100%;
+    margin-top:0;
+    padding: 0 20px;
+  }
   
-  /* Clase para animar los párrafos */
+  /* Columnas convertidas a secciones */
+  .card{background:transparent;padding:15px 0;}
+  aside.card{ 
+    /* Estilo de la tarjeta de evento */
+    background:linear-gradient(180deg, rgba(249,245,234,0.9), white);
+    padding:25px 18px;
+    border-radius:12px;
+    box-shadow:0 6px 18px rgba(0,0,0,0.08);
+    margin: 20px 0;
+    border: 1px solid rgba(122, 138, 86, 0.2);
+  }
+
+  /* Títulos y Párrafos */
+  .section-title{font-family:'Playfair Display', serif;color:var(--verde-oscuro);font-size:24px;margin-bottom:12px;border-bottom:1px solid rgba(79,107,56,0.2);padding-bottom:5px;}
   .paragraph{
-    margin-bottom:14px;font-size:16px;line-height:1.7;
+    margin-bottom:18px;font-size:16px;line-height:1.7;
     opacity:0;
     transform:translateY(14px);
-    /* Usamos 'forwards' para que el elemento se quede en el estado final (opacity:1) */
+    /* Animación de aparición suave al cargar */
     animation:fadeUp .8s forwards ease-out;
   }
   
-  /* Retrasos para la secuencia de animación nostálgica */
-  .paragraph:nth-of-type(1){animation-delay:.6s} 
-  .paragraph:nth-of-type(2){animation-delay:.9s} 
-  .paragraph:nth-of-type(3){animation-delay:1.2s}
+  /* Retrasos secuenciales (efecto story) */
+  .paragraph:nth-of-type(1){animation-delay:0.6s} 
+  .paragraph:nth-of-type(2){animation-delay:1.2s} 
+  .paragraph:nth-of-type(3){animation-delay:1.8s}
   
-  /* Keyframes para el efecto de aparición */
   @keyframes fadeUp{to{opacity:1;transform:none;}}
 
-  /* right column: Detalles del evento */
-  aside.card{background:linear-gradient(180deg, rgba(249,245,234,0.9), white);padding:18px;border-radius:12px;box-shadow:0 6px 18px rgba(0,0,0,0.04);}
-
-  .event-block{display:flex;flex-direction:column;gap:8px;align-items:center}
+  /* Calendario y Countdown */
+  .event-block{display:flex;flex-direction:column;gap:12px;align-items:center}
   .calendar {
-    width:100%;background:#fff;border-radius:10px;padding:14px;border:1px solid #efe5d2;
+    width:100%;background:#fff;border-radius:10px;padding:16px;border:2px solid var(--verde-oliva);
     display:flex;flex-direction:column;align-items:center;gap:8px;
   }
-  .month{font-size:14px;color:#79664f}
-  .day-big{font-size:46px;font-weight:700;color:var(--verde-oscuro)}
-  .weekday{font-size:14px;color:#6b6b63}
+  .month{font-size:16px;color:var(--verde-oliva);font-weight:600;}
+  .day-big{font-size:52px;font-weight:700;color:var(--verde-oscuro);line-height:1;}
+  .weekday{font-size:16px;color:#6b6b63}
 
-  .meta{font-size:15px;color:#505042;margin-top:8px}
+  .meta{font-size:16px;color:#505042;margin-top:10px;font-weight:400;}
 
-  /* Estilo de los botones */
-  .btn{display:inline-block;padding:10px 16px;border-radius:999px;background:var(--verde-oliva);color:white;text-decoration:none;font-weight:600;margin:8px 0;transition:all .18s}
-  .btn.outline{background:transparent;border:2px solid var(--verde-oliva);color:var(--verde-oliva)}
+  .btn{display:block;width: 90%;max-width:300px;padding:12px 16px;border-radius:999px;font-size:16px;font-weight:600;margin:10px auto;transition:all .18s;text-align:center;}
   .btn:hover{transform:translateY(-3px);box-shadow:0 8px 18px rgba(79,107,56,0.15);}
+  
+  /* Contador */
+  .countdown{margin-top:15px;font-size:20px;font-weight:700;color:var(--verde-oscuro);text-shadow: 1px 1px 2px rgba(0,0,0,0.05);}
 
-  /* countdown */
-  .countdown{margin-top:12px;font-size:18px;font-weight:700;color:#3e4b3b}
-
-  /* Pie de página */
-  footer{text-align:center;margin-top:20px;color:#6a655c;padding-top:8px;border-top:1px dashed #efe8db}
+  /* Footer */
+  footer{text-align:center;margin-top:30px;padding:15px 0 30px;color:#6a655c;border-top:1px dashed #efe8db;width: 100%;}
   .signature{font-family:'Playfair Display', serif;color:var(--verde-oliva);font-size:18px;margin-top:6px}
 
   /* Control de audio (fijo en móvil) */
   #audioToggle{position:fixed;right:18px;bottom:18px;background:var(--dorado);border:none;color:#fff;padding:12px;border-radius:999px;font-size:18px;box-shadow:0 8px 20px rgba(0,0,0,0.12);cursor:pointer;z-index:999}
   #audioToggle.hidden{display:none}
+  @media(min-width:421px) {
+    /* Asegurar que la vista sea vertical incluso en escritorio */
+    body { display: flex; justify-content: center; background-color: #e0e0e0; }
+    .wrap { margin: 20px auto; min-height: calc(100vh - 40px); border-radius: 14px; }
+  }
 </style>
 </head>
 <body>
@@ -123,7 +149,7 @@
 
   <header>
     <h1>¡Te invitamos a Celebrar la vida de esta extraordinaria mujer!</h1>
-    <div class="lead">Que nos ha brindado <strong>AMOR, SABIDURÍA y LUZ</strong></div>
+    <div class="lead">Que nos ha brindado **AMOR, SABIDURÍA y LUZ**</div>
   </header>
 
   <div class="photo-wrap">
@@ -133,15 +159,9 @@
   <div class="content" aria-live="polite">
         <div class="card">
       <div class="section-title">Bienvenida</div>
-      <div class="paragraph">Son 80 años llenos de amor, enseñanzas, fortaleza y momentos inolvidables.</div>
-      <div class="paragraph">Dios nos ha bendecido con una madre y abuela maravillosa, y este día queremos honrar su historia, su dulzura y el inmenso amor que ha sembrado en cada corazón que ha tocado.</div>
+      <div class="paragraph">Son **80 años** llenos de amor, enseñanzas, fortaleza y momentos inolvidables.</div>
+      <div class="paragraph">Dios nos ha bendecido con una madre y abuela maravillosa, y este día queremos **honrar su historia**, su dulzura y el inmenso amor que ha sembrado en cada corazón que ha tocado.</div>
       <div class="paragraph">¡Acompáñanos a celebrar esta hermosa bendición que la vida nos regala!</div>
-
-      <div style="height:12px"></div>
-
-      <div class="section-title">Mensaje Especial</div>
-      <p style="font-style:italic;color:#4b4b43;margin-bottom:6px">“Los años no se cuentan, se celebran. Los momentos no se guardan, se atesoran. ¡Y la vida no solo se vive, sino que se agradece!”</p>
-      <p class="signature">Madre, Abuelita; gracias por ser nuestro ejemplo, nuestro abrazo seguro y nuestra mayor inspiración.</p>
     </div>
 
         <aside class="card" aria-label="Detalles del evento">
@@ -156,95 +176,4 @@
 
         <div class="meta">Finca San Miguel, Santagüeda</div>
 
-        <a class="btn" href="https://wa.me/573117266064?text=Hola%2C%20confirmo%20mi%20asistencia%20a%20los%2080%20años%20de%20Flor%20Mar%C3%ADa" target="_blank" rel="noopener">Confirmar asistencia</a>
-
-        <a class="btn outline" href="https://www.google.com/maps/place/Finca+San+Miguel/@5.0679203,-75.6838147,17z" target="_blank" rel="noopener">Cómo llegar</a>
-
-        <div class="countdown" id="countdown" aria-live="polite">Calculando...</div>
-      </div>
-    </aside>
-  </div>
-
-  <footer>
-    <div>¡Acompáñanos a brindar por ella! 🥂</div>
-    <div style="font-size:13px;color:#827b70;margin-top:8px">Con cariño, la familia de Flor María</div>
-  </footer>
-</div>
-
-<audio id="bgAudio" loop>
-  <source src="https://files.catbox.moe/yogpbx.mp3" type="audio/mpeg">
-</audio>
-<button id="audioToggle" class="hidden" aria-label="Activar música">🎵</button>
-
-<script>
-/* --- 1. Control de Música y Fallback --- */
-const audio = document.getElementById('bgAudio');
-const audioBtn = document.getElementById('audioToggle');
-
-// Intenta la reproducción automática; si falla, muestra el botón
-function tryPlayAudio() {
-  audio.play().then(()=> {
-    // Reproducción exitosa
-    audioBtn.classList.add('hidden');
-    audioBtn.textContent = '⏸'; 
-  }).catch((e)=>{
-    // Reproducción bloqueada -> muestra el botón
-    audioBtn.classList.remove('hidden');
-    audioBtn.textContent = '🎵'; 
-  });
-}
-
-// Intenta reproducir al cargar la página
-document.addEventListener('DOMContentLoaded', tryPlayAudio);
-
-// Intenta reproducir al primer clic/interacción del usuario (necesario en móviles)
-document.body.addEventListener('click', function handler(){
-  tryPlayAudio();
-  document.body.removeEventListener('click', handler);
-});
-
-// El botón alterna entre reproducir/pausar
-audioBtn.addEventListener('click', function(){
-  if (audio.paused) { 
-    audio.play(); 
-    audioBtn.textContent = '⏸'; 
-  } else { 
-    audio.pause(); 
-    audioBtn.textContent = '🎵'; 
-  }
-});
-
-/* --- 2. Contador Regresivo --- */
-(function startCountdown(){
-  // Fecha y hora del evento: 06 Dic 2025 a las 15:00 (hora local)
-  const target = new Date('2025-12-06T15:00:00'); 
-  const el = document.getElementById('countdown');
-  
-  function tick(){
-    const now = new Date();
-    let diff = target - now;
-    
-    if (diff <= 0) { 
-      el.textContent = '¡Hoy es el gran día! 🎉'; 
-      return; 
-    }
-    
-    // Cálculos de tiempo
-    const days = Math.floor(diff / (1000*60*60*24));
-    diff -= days*(1000*60*60*24);
-    const hours = Math.floor(diff / (1000*60*60));
-    diff -= hours*(1000*60*60);
-    const mins = Math.floor(diff / (1000*60));
-    diff -= mins*(1000*60);
-    const secs = Math.floor(diff/1000);
-    
-    el.textContent = `${days} días · ${hours}h ${mins}m ${secs}s`;
-  }
-  
-  tick(); // Llama inmediatamente
-  setInterval(tick, 1000); // Actualiza cada segundo
-})();
-</script>
-
-</body>
-</html>
+        <div class="countdown" id="countdown"
