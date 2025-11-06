@@ -3,76 +3,96 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>80 Años - Flor Maria</title>
-<link rel="stylesheet" href="style.css">
+<title>Mis 80 Años</title>
 
-<!-- Música -->
-<audio id="music" autoplay loop>
-  <source src="https://raw.githubusercontent.com/erikavsanchezt-lab/Mis80/main/music/Alex%20Campos%20-%20Mi%20Viejita%20(Video%20Oficial)%20-%20Alex%20Campos.mp3" type="audio/mpeg">
-</audio>
+<style>
+    body {
+        margin: 0;
+        font-family: 'Georgia', serif;
+        background: #fdf8ef url('https://www.transparenttextures.com/patterns/handmade-paper.png');
+        color: #4a3b2a;
+        text-align: center;
+        overflow-x: hidden;
+    }
 
-<script>
-document.addEventListener("click", () => {
-    document.getElementById("music").play();
-}, { once: true });
-</script>
+    /* Fondo botánico */
+    .leaf-bg {
+        position: fixed;
+        top: 0; left: 0;
+        width: 100%; height: 100%;
+        background: url('https://i.imgur.com/2qLQWck.png') center/cover no-repeat;
+        opacity: 0.08;
+        z-index: -1;
+    }
 
+    .container {
+        padding: 40px 20px;
+        animation: fadeIn 2s ease-in-out;
+    }
+
+    .title {
+        font-size: 48px;
+        font-weight: bold;
+        color: #5c452d;
+    }
+
+    .subtitle {
+        font-size: 22px;
+        margin-top: 10px;
+        font-style: italic;
+        color: #7a5d3b;
+    }
+
+    .img-frame {
+        margin: 30px auto;
+        width: 300px;
+        padding: 10px;
+        border: 5px solid #d2b48c;
+        border-radius: 20px;
+        background: #fff7e6;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+
+    img {
+        width: 100%;
+        border-radius: 15px;
+    }
+
+    .botanical-line {
+        width: 60%;
+        margin: 30px auto;
+        height: 2px;
+        background: linear-gradient(to right, transparent, #bfa98e, transparent);
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+</style>
 </head>
+
 <body>
 
-<header class="hero">
-    <div class="overlay"></div>
-    <h1 class="title">Celebrando la Vida</h1>
-    <h2 class="subtitle">Flor Maria • 80 Años</h2>
-    <p class="intro">¡Te invitamos a Celebrar la vida de esta extraordinaria mujer,<br>
-    que nos ha brindado AMOR, SABIDURÍA y LUZ!</p>
-</header>
+<!-- Música autoplay -->
+<audio autoplay loop>
+  <source src="https://raw.githubusercontent.com/erikavsanchezt-lab/Mis80/main/music/Mi%20Viejita.mp3" type="audio/mpeg">
+</audio>
 
-<section class="photo-section">
-    <img src="https://raw.githubusercontent.com/erikavsanchezt-lab/Mis80/main/img/Abuelita.jpg" class="profile-photo">
-</section>
+<div class="leaf-bg"></div>
 
-<section class="text-section fade-in">
-    <p>Son 80 años llenos de amor, enseñanzas, fortaleza y momentos inolvidables.</p>
-    <p>Dios nos ha bendecido con una madre, padre y abuela maravillosa, y este día queremos honrar su historia, su dulzura y el inmenso amor que ha sembrado en cada corazón que ha tocado.</p>
-    <p>¡Acompáñanos a celebrar esta hermosa bendición que la vida nos regala!</p>
-</section>
+<div class="container">
+    <div class="title">Celebrando 80 Años</div>
+    <div class="subtitle">Un jardín lleno de amor, recuerdos y gratitud 🌿✨</div>
 
-<section class="quote fade-in">
-    <p>“Pues los años no se cuentan, se celebran.<br>
-    Los momentos no se guardan, se atesoran.<br>
-    ¡Y la vida no solo se vive, sino que se agradece!”</p>
-    <p class="small">Madre, Abuelita; gracias por ser nuestro ejemplo, nuestro abrazo seguro y nuestra mayor inspiración.</p>
-</section>
-
-<section class="event-info fade-in">
-    <h3>Detalles del Evento</h3>
-
-    <div class="calendar">
-        <p class="month">Diciembre 2025</p>
-        <table>
-            <tr><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td class="active">6</td><td>7</td></tr>
-        </table>
-        <p class="day">Sábado 06 de Diciembre</p>
-        <p class="place">Finca San Miguel, Santagüeda</p>
+    <div class="img-frame">
+        <img src="img/Abuelita.jpg" alt="Foto celebrada">
     </div>
 
-    <a href="https://wa.me/573117266064?text=Confirmo%20mi%20asistencia%20al%20cumpleaños%20de%20Flor%20María"
-       class="btn">Confirmar asistencia</a>
+    <div class="botanical-line"></div>
 
-    <a href="https://www.google.com/maps/place/Finca+San+Miguel/@5.0679203,-75.6838147"
-       class="btn outline">Cómo llegar</a>
-</section>
+    <h3>Gracias por florecer amor en cada etapa de la vida.</h3>
+</div>
 
-<section class="countdown fade-in">
-    <p>¡El gran día se acerca! Estamos felices de compartir esta ocasión tan especial contigo.</p>
-    <div id="timer"></div>
-</section>
-
-<footer class="footer">
-    <p>¡Acompáñanos a brindar por ella! 🥂</p>
-</footer>
-
-<script src="script.js"></script>
 </body>
 </html>
