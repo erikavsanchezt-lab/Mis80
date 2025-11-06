@@ -25,6 +25,8 @@ body {
     min-height: 100vh;
     overflow-x: hidden;
     text-align: center;
+    /* Suaviza el desplazamiento en algunos navegadores */
+    scroll-behavior: smooth; 
 }
 
 /* --- Fondo Botánico Sutil --- */
@@ -35,7 +37,7 @@ body::before {
     left: 0;
     width: 100%;
     height: 100%;
-    /* Reemplaza con una imagen de patrón botánico sutil si tienes una */
+    /* Patrón de ejemplo de hojas sutiles. Reemplaza con tu imagen si tienes una. */
     background-image: url('https://i.imgur.com/kQ4wWjJ.png'); 
     background-repeat: repeat;
     background-size: 150px; 
@@ -93,12 +95,22 @@ body::before {
     font-family: var(--font-header);
     font-size: 3.5em;
     margin-bottom: 10px;
+    /* Asegurar que los títulos también se animen al inicio */
+    opacity: 0;
+    animation: fadeInUp 1s ease-out forwards 0.3s; 
 }
 
 .hero p {
     font-style: italic;
     font-size: 1.2em;
     margin-top: 0;
+    opacity: 0;
+    animation: fadeInUp 1s ease-out forwards 0.8s;
+}
+
+.foto-principal {
+    opacity: 0;
+    animation: fadeInUp 1s ease-out forwards 0s;
 }
 
 /* --- Secciones de Texto --- */
@@ -183,6 +195,8 @@ body::before {
     font-size: 3em;
     color: #cc9900; /* Dorado para destacar */
     font-weight: 700;
+    /* La animación de los números es un plus */
+    transition: color 0.5s ease-in-out;
 }
 
 /* --- Pie de Página --- */
@@ -198,7 +212,19 @@ footer p {
     font-size: 1em;
 }
 
-/* --- Animaciones (Para los parrafos con JavaScript) --- */
+/* --- Animaciones CSS para los párrafos (activadas por JS) --- */
+
+/* Keyframe para animaciones de entrada */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
 
 /* Clase inicial: Oculta los párrafos al inicio */
 .animated-paragraph {
@@ -211,32 +237,6 @@ footer p {
 .animated-paragraph.is-visible {
     opacity: 1;
     transform: translateY(0);
-}
-
-/* Animaciones de entrada inicial (solo títulos) */
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.hero h1, .hero p, .foto-principal {
-    opacity: 0;
-    animation: fadeInUp 1s ease-out forwards;
-    animation-delay: 0.3s;
-}
-
-.hero p {
-    animation-delay: 0.8s;
-}
-
-.foto-principal {
-    animation-delay: 0s;
 }
 
 /* Media Queries para Responsividad */
@@ -257,5 +257,10 @@ footer p {
         display: block;
         width: 90%;
         margin: 10px auto;
+    }
+    .music-btn {
+        top: 10px;
+        right: 10px;
+        padding: 8px 12px;
     }
 }
