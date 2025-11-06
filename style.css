@@ -1,25 +1,33 @@
-/* Importar fuentes de Google */
+/* Importar fuentes: Cormorant Garamond (Elegante/Nostálgica) y Lora (Legible/Orgánica) */
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap');
 
-/* Reset básico */
+/* Reset y Estilo Base */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-body {
-    font-family: 'Lora', serif; /* Fuente principal legible */
-    line-height: 1.7;
-    color: #4a4a4a; /* Gris oscuro suave */
-    background-color: #fcfaf5; /* Blanco crema */
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-    overflow-x: hidden; /* Prevenir scroll horizontal por animaciones */
+:root {
+    --color-principal: #7b9e87; /* Verde hoja suave */
+    --color-acento: #a3c4a7; /* Verde más claro */
+    --color-texto: #4a4a4a; /* Gris oscuro suave */
+    --color-fondo: #fcfaf5; /* Blanco crema */
+    --font-header: 'Cormorant Garamond', serif;
+    --font-body: 'Lora', serif;
 }
 
-/* Fondo con patrón botánico sutil */
+body {
+    font-family: var(--font-body);
+    line-height: 1.7;
+    color: var(--color-texto);
+    background-color: var(--color-fondo);
+    min-height: 100vh;
+    overflow-x: hidden;
+    text-align: center;
+}
+
+/* --- Fondo Botánico Sutil --- */
 body::before {
     content: '';
     position: fixed;
@@ -27,140 +35,185 @@ body::before {
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url('https://i.imgur.com/kQ4wWjJ.png'); /* Imagen de fondo sutil (ejemplo) */
+    /* Reemplaza con una imagen de patrón botánico sutil si tienes una */
+    background-image: url('https://i.imgur.com/kQ4wWjJ.png'); 
     background-repeat: repeat;
-    background-size: 150px; /* Ajusta el tamaño del patrón */
-    opacity: 0.1; /* Muy sutil */
+    background-size: 150px; 
+    opacity: 0.1; 
     z-index: -1;
 }
 
-/* --- Encabezado --- */
-.site-header {
-    background-color: #7b9e87; /* Verde hoja suave */
+/* --- Botón de Música --- */
+.music-btn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: var(--color-principal);
     color: white;
-    padding: 40px 20px;
-    text-align: center;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    padding: 10px 15px;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 0.9em;
+    z-index: 100;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    transition: background-color 0.3s;
 }
 
-.site-header h1 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 3.5em;
-    font-weight: 700;
-    letter-spacing: 1px;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+.music-btn:hover {
+    background-color: #5c7e68;
 }
 
-/* --- Contenedor Principal --- */
-.content-container {
-    width: 90%;
-    max-width: 700px; /* Ancho más contenido y acogedor */
-    margin: 40px auto;
-    padding: 40px;
-    background-color: rgba(255, 255, 255, 0.95); /* Fondo blanco semi-transparente */
-    border-radius: 10px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-    flex-grow: 1;
+/* --- Sección Principal (Hero) --- */
+.hero {
     position: relative;
-    overflow: hidden; /* Para que las animaciones no desborden */
+    padding: 100px 20px 50px;
+    background-color: var(--color-principal);
+    color: white;
+    overflow: hidden;
 }
 
-/* Márgenes entre secciones */
-section {
-    margin-bottom: 30px;
+.hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+    margin: 0 auto;
 }
 
-/* Estilo para títulos de sección */
-h2, h3 {
-    font-family: 'Cormorant Garamond', serif;
-    color: #5c7e68; /* Verde un poco más oscuro */
-    margin-bottom: 15px;
-    border-bottom: 1px solid #d4dccf; /* Línea divisoria suave */
-    padding-bottom: 8px;
+.foto-principal {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 5px solid var(--color-fondo);
+    box-shadow: 0 0 15px rgba(0,0,0,0.3);
+    margin-bottom: 20px;
 }
 
-h2 {
-    font-size: 2.5em;
-    text-align: center;
+.hero h1 {
+    font-family: var(--font-header);
+    font-size: 3.5em;
+    margin-bottom: 10px;
 }
 
-h3 {
-    font-size: 1.8em;
-    color: #7b9e87; /* Verde hoja suave */
+.hero p {
+    font-style: italic;
+    font-size: 1.2em;
+    margin-top: 0;
 }
 
-/* Estilo para párrafos */
-p {
-    margin-bottom: 15px;
-    font-size: 1.1em;
+/* --- Secciones de Texto --- */
+.texto, .especial {
+    max-width: 650px;
+    margin: 40px auto;
+    padding: 0 20px;
+    font-size: 1.15em;
     line-height: 1.8;
 }
 
-p strong {
-    color: #5c7e68; /* Resaltar datos importantes */
+.texto p, .especial p {
+    margin-bottom: 20px;
 }
 
-/* Botón de confirmación */
-.button {
-    display: inline-block;
-    background-color: #a3c4a7; /* Verde más claro */
+.especial p strong {
+    color: var(--color-principal);
+    font-weight: 700;
+    font-style: italic;
+    font-size: 1.2em;
+}
+
+/* --- Sección Evento --- */
+.evento {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 30px 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    border: 1px solid var(--color-acento);
+}
+
+.evento h2 {
+    font-family: var(--font-header);
+    color: var(--color-principal);
+    font-size: 2.2em;
+    margin-bottom: 15px;
+}
+
+.evento p {
+    font-size: 1.2em;
+    margin-bottom: 25px;
+    color: #5c7e68;
+}
+
+/* Botones de acción */
+.btn {
+    background-color: var(--color-acento);
     color: white;
     padding: 12px 25px;
+    border: none;
     border-radius: 5px;
-    text-decoration: none;
     font-weight: 700;
-    margin-top: 20px;
-    transition: background-color 0.3s ease, transform 0.2s ease;
+    font-size: 1em;
+    cursor: pointer;
+    margin: 5px 10px;
+    transition: background-color 0.3s, transform 0.2s;
     box-shadow: 0 3px 6px rgba(0,0,0,0.1);
 }
 
-.button:hover {
-    background-color: #7b9e87; /* Verde hoja suave al pasar el ratón */
+.btn:hover {
+    background-color: var(--color-principal);
     transform: translateY(-2px);
 }
 
-/* Sección de Citas */
-.quote-section {
-    text-align: center;
-    font-style: italic;
-    color: #888;
-    margin-top: 40px;
-    padding-top: 20px;
-    border-top: 1px dashed #e0e0e0;
+/* --- Sección Contador --- */
+.contador {
+    margin: 50px auto;
+    padding: 20px;
 }
 
-.quote-section p {
-    font-size: 1em;
-    line-height: 1.5;
+.contador h3 {
+    font-family: var(--font-header);
+    color: var(--color-principal);
+    font-size: 2em;
+    margin-bottom: 15px;
 }
 
-/* --- Footer --- */
-.site-footer {
-    background-color: #d4dccf; /* Tono de verde muy claro */
-    color: #5c7e68;
-    text-align: center;
-    padding: 20px 0;
+#countdown {
+    font-family: var(--font-header);
+    font-size: 3em;
+    color: #cc9900; /* Dorado para destacar */
+    font-weight: 700;
+}
+
+/* --- Pie de Página --- */
+footer {
+    background-color: var(--color-acento);
+    color: white;
+    padding: 25px 0;
     margin-top: auto;
-    font-size: 0.9em;
-    border-top: 1px solid #c0c8b8;
 }
 
-/* --- Animaciones CSS (invisibles al inicio, activadas por JS) --- */
+footer p {
+    margin: 5px 0;
+    font-size: 1em;
+}
 
-/* Base para animaciones */
-.animated {
+/* --- Animaciones (Para los parrafos con JavaScript) --- */
+
+/* Clase inicial: Oculta los párrafos al inicio */
+.animated-paragraph {
     opacity: 0;
     transform: translateY(20px);
     transition: opacity 0.8s ease-out, transform 0.8s ease-out;
 }
 
-/* Clase para activar la animación */
-.animated.is-visible {
+/* Clase que activa la animación al ser visible (añadida por JS) */
+.animated-paragraph.is-visible {
     opacity: 1;
     transform: translateY(0);
 }
 
-/* Animación Fade In Up */
+/* Animaciones de entrada inicial (solo títulos) */
 @keyframes fadeInUp {
     from {
         opacity: 0;
@@ -172,70 +225,37 @@ p strong {
     }
 }
 
-.fade-in-up {
-    opacity: 0; /* Inicialmente oculto */
+.hero h1, .hero p, .foto-principal {
+    opacity: 0;
     animation: fadeInUp 1s ease-out forwards;
-    animation-fill-mode: forwards; /* Mantiene el estado final de la animación */
+    animation-delay: 0.3s;
 }
 
-/* Retrasos para animaciones en secuencia */
-.delay-1 { animation-delay: 0.5s; }
-.delay-2 { animation-delay: 0.8s; }
-..delay-3 { animation-delay: 1.1s; }
-.delay-4 { animation-delay: 1.4s; }
-.delay-5 { animation-delay: 1.7s; }
-.delay-6 { animation-delay: 2.0s; }
-.delay-7 { animation-delay: 2.3s; }
-.delay-8 { animation-delay: 2.6s; }
-.delay-9 { animation-delay: 2.9s; }
-.delay-10 { animation-delay: 3.2s; }
-.delay-11 { animation-delay: 3.5s; }
-.delay-12 { animation-delay: 3.8s; }
+.hero p {
+    animation-delay: 0.8s;
+}
 
+.foto-principal {
+    animation-delay: 0s;
+}
 
 /* Media Queries para Responsividad */
-@media (max-width: 768px) {
-    .site-header h1 {
+@media (max-width: 600px) {
+    .hero h1 {
         font-size: 2.5em;
     }
-
-    .content-container {
-        width: 95%;
-        padding: 25px;
-        margin: 20px auto;
-    }
-
-    h2 {
-        font-size: 2em;
-    }
-
-    h3 {
-        font-size: 1.5em;
-    }
-
-    p {
+    .texto, .especial {
         font-size: 1em;
     }
-}
-
-@media (max-width: 480px) {
-    .site-header h1 {
-        font-size: 2em;
-    }
-
-    .content-container {
-        padding: 20px;
-    }
-
-    h2 {
+    .evento h2 {
         font-size: 1.8em;
     }
-
-    h3 {
-        font-size: 1.3em;
+    #countdown {
+        font-size: 2.5em;
     }
-
-    .button {
-        padding: 10px 20px;
+    .btn {
+        display: block;
+        width: 90%;
+        margin: 10px auto;
     }
 }
