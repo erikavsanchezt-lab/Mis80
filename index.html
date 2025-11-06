@@ -1,98 +1,84 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mis 80 Años</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Celebración 80 Años - Flor María</title>
+
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Playfair+Display:wght@400;500;700&display=swap" rel="stylesheet">
 
 <style>
-    body {
-        margin: 0;
-        font-family: 'Georgia', serif;
-        background: #fdf8ef url('https://www.transparenttextures.com/patterns/handmade-paper.png');
-        color: #4a3b2a;
-        text-align: center;
-        overflow-x: hidden;
-    }
+body {
+    margin: 0;
+    font-family: 'Playfair Display', serif;
+    background: #f6f3ee;
+    color: #3c3b3a;
+    text-align: center;
+    overflow-x: hidden;
+}
 
-    /* Fondo botánico */
-    .leaf-bg {
-        position: fixed;
-        top: 0; left: 0;
-        width: 100%; height: 100%;
-        background: url('https://i.imgur.com/2qLQWck.png') center/cover no-repeat;
-        opacity: 0.08;
-        z-index: -1;
-    }
+/* Fondo botánico elegante */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: url("https://raw.githubusercontent.com/erikavsanchezt-lab/Mis80/main/img/botanico.png");
+    background-size: cover;
+    background-position: center;
+    opacity: 0.22;
+    z-index: -1;
+}
 
-    .container {
-        padding: 40px 20px;
-        animation: fadeIn 2s ease-in-out;
-    }
+/* Secciones */
+.section {
+    padding: 70px 20px;
+    animation: fadeIn 1.5s ease both;
+}
 
-    .title {
-        font-size: 48px;
-        font-weight: bold;
-        color: #5c452d;
-    }
+@keyframes fadeIn {
+    from {opacity: 0; transform: translateY(25px);}
+    to {opacity: 1; transform: translateY(0);}
+}
 
-    .subtitle {
-        font-size: 22px;
-        margin-top: 10px;
-        font-style: italic;
-        color: #7a5d3b;
-    }
+/* Encabezado */
+h1 {
+    font-size: 2.8rem;
+    font-family: "Cinzel", serif;
+    color: #4a463e;
+    margin-bottom: 10px;
+}
 
-    .img-frame {
-        margin: 30px auto;
-        width: 300px;
-        padding: 10px;
-        border: 5px solid #d2b48c;
-        border-radius: 20px;
-        background: #fff7e6;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-    }
+h2 {
+    font-size: 1.4rem;
+    font-weight: 500;
+}
 
-    img {
-        width: 100%;
-        border-radius: 15px;
-    }
+/* Foto */
+.hero-img {
+    width: 260px;
+    height: 260px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 6px solid #d9c9a3;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+    margin-bottom: 20px;
+}
 
-    .botanical-line {
-        width: 60%;
-        margin: 30px auto;
-        height: 2px;
-        background: linear-gradient(to right, transparent, #bfa98e, transparent);
-    }
+/* Texto */
+p {
+    max-width: 650px;
+    margin: 15px auto;
+    line-height: 1.7;
+    font-size: 1.15rem;
+}
 
-    @keyframes fadeIn {
-        from { opacity: 0; transform: translateY(20px); }
-        to { opacity: 1; transform: translateY(0); }
-    }
-</style>
-</head>
-
-<body>
-
-<!-- Música autoplay -->
-<audio autoplay loop>
-  <source src="https://raw.githubusercontent.com/erikavsanchezt-lab/Mis80/main/music/Mi%20Viejita.mp3" type="audio/mpeg">
-</audio>
-
-<div class="leaf-bg"></div>
-
-<div class="container">
-    <div class="title">Celebrando 80 Años</div>
-    <div class="subtitle">Un jardín lleno de amor, recuerdos y gratitud 🌿✨</div>
-
-    <div class="img-frame">
-        <img src="img/Abuelita.jpg" alt="Foto celebrada">
-    </div>
-
-    <div class="botanical-line"></div>
-
-    <h3>Gracias por florecer amor en cada etapa de la vida.</h3>
-</div>
-
-</body>
-</html>
+/* Botones */
+.btn {
+    display: inline-block;
+    background: #cab894;
+    color: #fff;
+    padding: 14px 28px;
+    border-radius: 40px;
+    text-decoration: none;
