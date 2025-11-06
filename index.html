@@ -1,61 +1,67 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Celebración 80 Años</title>
-<link rel="stylesheet" href="styles.css">
-</head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>80 Años Flor María</title>
 
-<body>
+<link rel="stylesheet" href="style.css" />
 
-<audio id="music" loop>
+<!-- Música autoplay -->
+<audio id="music" autoplay loop>
   <source src="music/MiViejita.mp3" type="audio/mpeg">
 </audio>
-
-<div class="container fade-in">
-    <h1 class="title">Celebrando los 80 Años</h1>
-    <h2 class="subtitle">De Nuestra Querida Abuelita</h2>
-
-    <img class="photo bounce-in" src="img/Abuelita.jpg" alt="Foto Abuelita">
-
-    <p class="phrase slide-up">
-        Gracias por tu amor, tu dulzura y tu ejemplo.
-        Cada año contigo ha sido un regalo para nuestras vidas.
-    </p>
-
-    <div class="details fade-in-late">
-        🎉 <strong>Fecha:</strong> 16 de Noviembre 2025 <br>
-        🕓 <strong>Hora:</strong> 4:00 PM <br>
-        📍 <strong>Lugar:</strong> Casa de la Familia
-    </div>
-
-    <button id="playBtn" class="music-btn">🎵 Reproducir música</button>
-</div>
-
 <script>
-const audio = document.getElementById("music");
-const btn = document.getElementById("playBtn");
-
-function tryPlayMusic() {
-  audio.play().then(() => {
-      btn.style.display = "none"; 
-  }).catch(() => {
-      // Si el navegador bloquea autoplay, esperamos un click
-      document.addEventListener("click", () => {
-          audio.play();
-          btn.style.display = "none";
-      }, { once: true });
-  });
-}
-
-window.addEventListener("load", tryPlayMusic);
-
-btn.addEventListener("click", () => {
-    audio.play();
-    btn.style.display = "none";
+document.addEventListener("click", () => {
+  document.getElementById("music").play();
 });
 </script>
 
+</head>
+<body>
+
+<section class="hero fade-in">
+  <img src="img/Abuelita.jpg" class="photo" alt="Flor María" />
+  <h1>Celebrando 80 años de vida</h1>
+  <p class="intro">Un homenaje a una mujer llena de amor, sabiduría y luz</p>
+</section>
+
+<section class="section fade-in">
+  <p>Son 80 años llenos de amor, enseñanzas, fortaleza y momentos inolvidables.</p>
+  <p>Dios nos ha bendecido con una madre y abuela maravillosa.</p>
+  <p>Hoy honramos su historia, su dulzura y el inmenso amor que ha sembrado.</p>
+  <p><strong>¡Acompáñanos a celebrar esta hermosa bendición!</strong></p>
+</section>
+
+<section class="quote fade-in">
+  <h2>Mensaje Especial</h2>
+  <p>Los años no se cuentan, se celebran.<br>
+  Los momentos no se guardan, se atesoran.<br>
+  ¡Y la vida no solo se vive, sino que se agradece!</p>
+
+  <strong>Gracias por ser nuestro abrazo seguro y nuestra inspiración.</strong>
+</section>
+
+<section class="event-card fade-in">
+  <h2>📅 06 de diciembre 2025</h2>
+  <p>Finca San Miguel · Santagueda</p>
+</section>
+
+<section class="buttons fade-in">
+  <a href="https://wa.me/573117266064" class="btn">✅ Confirmar asistencia</a>
+  <a href="https://www.google.com/maps/place/Finca+San+Miguel/" class="btn-outline">📍 Cómo llegar</a>
+</section>
+
+<section class="section fade-in">
+  <h2>⏳ Falta poco</h2>
+  <p>¡Estamos felices de celebrar contigo!</p>
+  <div id="countdown" class="countdown"></div>
+</section>
+
+<section class="footer fade-in">
+  ✨ ¡Acompáñanos a brindar por ella! ✨
+</section>
+
+<script src="script.js"></script>
 </body>
 </html>
