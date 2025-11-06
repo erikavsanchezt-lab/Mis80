@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // ----------------------------------------------------
     const countdownElement = document.getElementById('countdown');
     // Establece la fecha del evento: 6 de Diciembre de 2025 (a las 00:00:00)
+    // ¡Asegúrate de que esta fecha es la correcta!
     const eventDate = new Date("Dec 6, 2025 00:00:00").getTime(); 
 
     const updateCountdown = setInterval(function() {
@@ -25,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (distance < 0) {
             clearInterval(updateCountdown);
             if (countdownElement) {
-                countdownElement.innerHTML = "¡LA CELEBRACIÓN HA COMENZADO!";
+                countdownElement.innerHTML = "¡LA CELEBRACIÓN HA COMENZADO! 🎉";
             }
         }
     }, 1000);
@@ -35,8 +36,8 @@ document.addEventListener('DOMContentLoaded', function() {
     // 2. Animaciones al Scroll (Intersection Observer)
     // ----------------------------------------------------
 
-    // Selecciona todos los párrafos de las secciones "texto" y "especial"
-    const paragraphsToAnimate = document.querySelectorAll('.texto p, .especial p');
+    // Selecciona todos los párrafos que deben animarse al aparecer
+    const paragraphsToAnimate = document.querySelectorAll('.texto p, .especial p, .evento p, .evento button, .evento a, .contador h3');
 
     const observerOptions = {
         root: null, 
@@ -78,7 +79,8 @@ window.toggleMusic = function() {
             .catch(error => {
                 // Manejar error si el navegador bloquea la reproducción automática
                 console.error("Error al intentar reproducir la música:", error);
-                alert("Por favor, haz clic de nuevo para reproducir la música.");
+                // Informar al usuario que debe hacer un segundo clic
+                alert("Tu navegador bloqueó la reproducción automática. Haz clic de nuevo en el botón para activar la música.");
                 btn.innerHTML = '▶️ Música';
             });
     } else {
