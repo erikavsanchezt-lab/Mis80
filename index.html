@@ -3,120 +3,61 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Celebrando tus 80 años</title>
+<title>Celebración 80 Años</title>
+<link rel="stylesheet" href="style.css">
 
-<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
-
-<style>
-body {
-  margin: 0;
-  font-family: "Playfair Display", serif;
-  background: #fdf8ef;
-  color: #4a3f35;
-  text-align: center;
-}
-
-/* Fondo floral */
-.background {
-  background-image: url('https://i.imgur.com/7FJgVhg.png');
-  background-size: cover;
-  background-attachment: fixed;
-  background-repeat: no-repeat;
-  padding: 60px 15px;
-}
-
-/* Título */
-h1 {
-  font-family: "Great Vibes", cursive;
-  font-size: 70px;
-  color: #7a5230;
-  margin-bottom: 10px;
-}
-
-/* Tarjeta */
-.card {
-  background: rgba(255, 255, 255, 0.92);
-  border-radius: 20px;
-  max-width: 700px;
-  margin: auto;
-  padding: 40px;
-  box-shadow: 0 4px 30px rgba(0,0,0,0.15);
-  backdrop-filter: blur(6px);
-  animation: fadeIn 2s ease-in;
-}
-
-/* Imagen redonda */
-img {
-  border-radius: 20px;
-  width: 60%;
-  max-width: 350px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.15);
-  margin-bottom: 20px;
-  animation: float 4s ease-in-out infinite;
-}
-
-@keyframes float {
- 0% { transform: translateY(0px); }
- 50% { transform: translateY(-10px); }
- 100% { transform: translateY(0px); }
-}
-
-@keyframes fadeIn {
- from { opacity: 0; transform: translateY(20px); }
- to { opacity: 1; transform: translateY(0); }
-}
-
-/* Texto */
-.message {
-  font-size: 22px;
-  line-height: 1.6;
-  margin-top: 10px;
-}
-
-.flower {
-  font-size: 35px;
-  margin: 10px 0;
-}
-</style>
-</head>
-
-<!-- Música -->
-<audio id="bgmusic" autoplay loop>
+<!-- Música autoplay -->
+<audio id="bgMusic" autoplay loop>
   <source src="https://files.catbox.moe/yogpbx.mp3" type="audio/mpeg">
 </audio>
+<script>
+  document.addEventListener("click", () => {
+    document.getElementById("bgMusic").play();
+  });
+</script>
 
+</head>
 <body>
-<div class="background">
 
-<h1>Feliz 80° cumpleaños</h1>
+<section>
+    <img src="tu-foto.jpg" class="hero-img" alt="Foto celebrada">
+    <h1>Celebramos 80 Años de Vida</h1>
+    <p>Con alegría y gratitud, te invitamos a compartir una fecha muy especial.</p>
+</section>
 
-<div class="card">
-  <img src="img/Abuelita.jpg" alt="Abuelita">
+<section>
+  <h2>Detalles del Evento</h2>
+  <p><strong>📅 Fecha:</strong> 24 de noviembre 2025<br>
+     <strong>🕒 Hora:</strong> 3:00 PM<br>
+     <strong>📍 Lugar:</strong> Salón Verde — Manizales</p>
+</section>
 
-  <p class="flower">🌿🌸🌿</p>
-
-  <p class="message">
-    Hoy celebramos tu vida, tu amor y cada recuerdo que has sembrado en nosotros.  
-    Eres luz, fuerza y ternura.  
-    Gracias por enseñarnos el valor de la familia y el amor verdadero. 💛
-  </p>
-
-  <p class="flower">🌿🌼🌿</p>
-
-  <p class="message">
-    ¡Feliz cumpleaños!  
-    Qué honor acompañarte en este hermoso camino de 80 años ✨
-  </p>
-</div>
-
-</div>
+<section>
+  <h2>Cuenta Regresiva</h2>
+  <div id="countdown" class="countdown"></div>
+</section>
 
 <script>
-// Intento de reproducir después de interacción del usuario (por reglas móviles)
-document.body.addEventListener("click", () => {
-  document.getElementById("bgmusic").play();
-});
+const targetDate = new Date("Nov 24, 2025 15:00:00").getTime();
+setInterval(function() {
+  const now = new Date().getTime();
+  const diff = targetDate - now;
+
+  const d = Math.floor(diff / (1000*60*60*24));
+  const h = Math.floor((diff % (1000*60*60*24))/(1000*60*60));
+  const m = Math.floor((diff % (1000*60*60))/(1000*60));
+  const s = Math.floor((diff % (1000*60))/1000);
+
+  document.getElementById("countdown").innerHTML = 
+  `${d}d ${h}h ${m}m ${s}s`;
+}, 1000);
 </script>
+
+<section>
+  <h2>Ubicación</h2>
+  <a class="btn" href="https://maps.app.goo.gl/xxxx" target="_blank">📍 Ver Mapa</a>
+  <a class="btn" href="https://wa.me/57XXXXXXXXXX" target="_blank">💬 Confirmar asistencia</a>
+</section>
 
 </body>
 </html>
