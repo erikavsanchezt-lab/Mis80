@@ -16,130 +16,13 @@ body {
     line-height: 1.6;
     text-align: center;
     
-    /* Fondo: Usando tu recurso para la textura de lino */
+    /* Fondo: Usando tu recurso y FIX para la persistencia */
     background-color: var(--color-fondo); 
     background-image: url('https://raw.githubusercontent.com/erikavsanchezt-lab/Mis80/main/img/Fondo2.png'); 
-    background-repeat: repeat; 
-    background-size: 200px; 
+    background-repeat: no-repeat; /* FIX: No repetir la imagen */
+    background-size: cover; /* FIX: Escalar la imagen para que cubra todo */
+    background-position: center center; /* FIX: Centrar la imagen */
+    background-attachment: fixed; /* Esto ayuda a que el fondo sea más visible */
 }
 
-/* SEPARACIÓN DE SECCIONES MÁS DISCRETA (Menos padding) */
-.section {
-    padding: 60px 5%; /* Reducido de 80px a 60px */
-    /* Eliminado: min-height: 60vh; */
-}
-
-/* --- NAV BAR (Menú Discreto) --- */
-.navbar {
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    background-color: rgba(245, 245, 220, 0.95); /* Semi-transparente */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    padding: 15px 5%; 
-    display: flex;
-    justify-content: space-between; 
-    align-items: center;
-}
-.nav-links {
-    flex-grow: 1;
-    text-align: center;
-}
-.nav-links a {
-    color: var(--color-acento1);
-    text-decoration: none;
-    margin: 0 15px;
-    font-size: 1.1em;
-    padding: 5px 10px;
-    transition: color 0.3s, border-bottom 0.3s;
-}
-.nav-links a:hover {
-    color: var(--color-acento2);
-    border-bottom: 2px solid var(--color-acento2);
-}
-
-/* --- CONTROL DE MÚSICA (Discreto y Tono del Menú) --- */
-.music-control {
-    background-color: transparent; 
-    color: var(--color-acento1); /* Color por defecto */
-    width: 30px; 
-    height: 30px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    box-shadow: none; 
-    transition: color 0.3s, background-color 0.3s;
-}
-.music-control:hover {
-    background-color: rgba(176, 101, 117, 0.1); 
-    color: var(--color-acento2); 
-}
-#music-icon {
-    font-size: 1em; 
-}
-
-/* --- SECCIÓN BIENVENIDA --- */
-.photo-container {
-    position: relative;
-    display: inline-block;
-}
-.profile-photo {
-    width: 280px;
-    height: 280px;
-    object-fit: cover;
-    border-radius: 50%;
-    border: 5px solid var(--color-fondo); 
-    display: block;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-    z-index: 5; /* Aseguramos que esté debajo del marco */
-}
-/* MARCO: Z-INDEX CORREGIDO */
-.botanic-frame {
-    position: absolute;
-    top: -40px;
-    left: -40px;
-    width: 360px; 
-    height: 360px;
-    z-index: 10; /* Aseguramos que esté encima de la foto */
-    pointer-events: none; 
-}
-
-/* --- ANIMACIÓN FLIP (Para la Cuenta Regresiva) --- */
-.flip-number {
-    position: relative;
-    display: inline-block;
-    perspective: 500px; 
-    overflow: hidden; /* Importante para el efecto */
-}
-.flip-number::before {
-    content: attr(data-old-value); 
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: var(--color-acento1); 
-    color: white;
-    padding-top: 5px;
-    transform-origin: center bottom;
-    transform: rotateX(0deg);
-    backface-visibility: hidden;
-    transition: transform 0.5s ease-in-out;
-}
-.flip-number.active::before {
-    transform: rotateX(-180deg); 
-}
-
-/* --- ANIMACIONES CSS (Scroll Reveal) --- */
-.reveal-item {
-    opacity: 0;
-    transform: translateY(40px);
-    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-}
-.reveal-item.active {
-    opacity: 1;
-    transform: translateY(0);
-}
-/* ... el resto de tu CSS anterior ... */
+/* ... el resto de tu CSS (navbar, menu-toggle, etc.) sigue igual ... */
