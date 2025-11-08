@@ -1,204 +1,91 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Flor Maria</title>
-<title>80 años</title>
-<!-- Tipografías -->
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
-
-<style>
-  :root{
-    --verde-oliva:#7A8A56;
-    --verde-oscuro:#4F6B38;
-    --dorado:#D4AF37;
-    --crema:#F9F5EA;
-    --texto:#333331;
-  }
-  html,body{height:100%;margin:0;background:var(--crema);color:var(--texto);font-family:MontserraT, "Montserrat", system-ui, sans-serif;}
-  /* container */
-  .wrap{max-width:980px;margin:24px auto;padding:28px;background:rgba(255,255,255,0.9);border-radius:14px;box-shadow:0 10px 30px rgba(20,20,20,0.08);position:relative;overflow:hidden;}
-  /* soft botanical svg background (repeats are subtle) */
-  .botanic {
-    pointer-events:none;
-    position:absolute;
-    inset:0;
-    opacity:0.12;
-    background-image: radial-gradient(circle at 10% 20%, rgba(122,138,86,0.06) 0 180px, transparent 181px),
-                      radial-gradient(circle at 90% 80%, rgba(79,107,56,0.06) 0 220px, transparent 221px);
-    mix-blend-mode:multiply;
-  }
-
-  header {text-align:center;padding:8px 12px 18px;}
-  h1{font-family:'breathing', serif; font-size:40px; margin:6px 0; color:var(--verde-oscuro);}
-  .lead{color:#6b695f;margin-top:6px;font-size:30px;}
-
-  /* hero photo */
-  .photo-wrap{display:flex;justify-content:center;margin-top:6px}
-  .photo{
-    width:300px;height:300px;border-radius:16px;object-fit:cover;border:6px solid #fff;box-shadow:0 10px 30px rgba(0,0,0,0.12);
-    transform:translateY(0);transition:transform .6s cubic-bezier(.2,.9,.3,1);
-  }
-  .photo:hover{transform:translateY(-6px) scale(1.01);}
-
-  /* content columns */
-  .content{display:grid;grid-template-columns: 1fr 360px;gap:22px;margin-top:22px;align-items:start;}
-  @media(max-width:900px){ .content{grid-template-columns:1fr;padding:0 10px;} .photo{width:220px;height:220px;} }
-
-  /* left column */
-  .card{background:transparent;padding:10px 6px;}
-  .section-title{font-family:'Playfair Display', serif;color:var(--verde-oliva);font-size:20px;margin-bottom:8px;}
-  .paragraph{margin-bottom:14px;font-size:16px;line-height:1.7;opacity:0;transform:translateY(14px);animation:fadeUp .8s forwards;}
-  .paragraph:nth-of-type(1){animation-delay:.2s} .paragraph:nth-of-type(2){animation-delay:.45s} .paragraph:nth-of-type(3){animation-delay:.7s}
-
-  @keyframes fadeUp{to{opacity:1;transform:none;}}
-
-  /* right column */
-  aside.card{background:linear-gradient(180deg, rgba(249,245,234,0.9), white);padding:18px;border-radius:12px;box-shadow:0 6px 18px rgba(0,0,0,0.04);}
-
-  .event-block{display:flex;flex-direction:column;gap:8px;align-items:center}
-  .calendar {
-    width:100%;background:#fff;border-radius:10px;padding:14px;border:1px solid #efe5d2;
-    display:flex;flex-direction:column;align-items:center;gap:8px;
-  }
-  .month{font-size:14px;color:#79664f}
-  .day-big{font-size:46px;font-weight:700;color:var(--verde-oscuro)}
-  .weekday{font-size:14px;color:#6b6b63}
-
-  .meta{font-size:15px;color:#505042;margin-top:8px}
-
-  .btn{display:inline-block;padding:10px 16px;border-radius:999px;background:var(--verde-oliva);color:white;text-decoration:none;font-weight:600;margin:8px 0;transition:all .18s}
-  .btn.outline{background:transparent;border:2px solid var(--verde-oliva);color:var(--verde-oliva)}
-  .btn:hover{transform:translateY(-3px);box-shadow:0 8px 18px rgba(79,107,56,0.08);}
-
-  /* countdown */
-  .countdown{margin-top:12px;font-size:18px;font-weight:700;color:#3e4b3b}
-
-  footer{text-align:center;margin-top:20px;color:#6a655c;padding-top:8px;border-top:1px dashed #efe8db}
-  .signature{font-family:'Playfair Display', serif;color:var(--verde-oliva);font-size:18px;margin-top:6px}
-
-  /* audio control button (mobile fallback) */
-  #audioToggle{position:fixed;right:18px;bottom:18px;background:var(--dorado);border:none;color:#fff;padding:12px;border-radius:999px;font-size:18px;box-shadow:0 8px 20px rgba(0,0,0,0.12);cursor:pointer;z-index:999}
-  #audioToggle.hidden{display:none}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flor María — 80 años</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div class="wrap" role="main">
-  <div class="botanic" aria-hidden="true"></div>
+    <audio id="background-music" loop>
+        <source src="https://files.catbox.moe/yogpbx.mp3" type="audio/mp3">
+        Tu navegador no soporta el elemento de audio.
+    </audio>
 
-  <header>
-    <h1>¡Te invitamos a Celebrar la vida de esta extraordinaria mujer!</h1>
-    <div class="lead">Que nos ha brindado <strong>AMOR, SABIDURÍA y LUZ</strong></div>
-  </header>
-
-  <div class="photo-wrap">
-    <!-- usa el RAW link del archivo que subiste en img/Abuelita.jpg -->
-    <img class="photo" src="https://raw.githubusercontent.com/erikavsanchezt-lab/Mis80/main/img/Abuelita.jpg" alt="Foto de la homenajeada">
-  </div>
-
-  <div class="content" aria-live="polite">
-    <!-- LEFT -->
-    <div class="card">
-      <div class="section-title">Bienvenida</div>
-      <div class="paragraph">Son 80 años llenos de amor, enseñanzas, fortaleza y momentos inolvidables.</div>
-      <div class="paragraph">Dios nos ha bendecido con una madre y abuela maravillosa, y este día queremos honrar su historia, su dulzura y el inmenso amor que ha sembrado en cada corazón que ha tocado.</div>
-      <div class="paragraph">¡Acompáñanos a celebrar esta hermosa bendición que la vida nos regala!</div>
-
-      <div style="height:12px"></div>
-
-      <div class="section-title">Mensaje Especial</div>
-      <p style="font-style:italic;color:#4b4b43;margin-bottom:6px">“Los años no se cuentan, se celebran. Los momentos no se guardan, se atesoran. ¡Y la vida no solo se vive, sino que se agradece!”</p>
-      <p class="signature">Madre, Abuelita; gracias por ser nuestro ejemplo, nuestro abrazo seguro y nuestra mayor inspiración.</p>
-    </div>
-
-    <!-- RIGHT (event info) -->
-    <aside class="card" aria-label="Detalles del evento">
-      <div class="section-title">Detalle del evento</div>
-
-      <div class="event-block">
-        <div class="calendar" role="group" aria-label="Calendario">
-          <div class="month">Diciembre 2025</div>
-          <div class="day-big">06</div>
-          <div class="weekday">Sábado</div>
+    <nav class="navbar">
+        <div class="nav-links">
+            <a href="#bienvenida">Bienvenida</a>
+            <a href="#mensaje1">Mensaje</a>
+            <a href="#detalles">Detalles</a>
+            <a href="#cierre">Cierre</a>
         </div>
+        <div id="music-control" class="music-control" title="Reproducir música de fondo">
+            <span id="music-icon">▶️</span>
+        </div>
+    </nav>
 
-        <div class="meta">Finca San Miguel, Santagüeda</div>
+    <main>
+        <section id="bienvenida" class="section reveal-item">
+            <h1 class="main-title">¡Te invitamos a Celebrar la vida de esta extraordinaria mujer!</h1>
+            <p class="subtitle">Que nos ha brindado <strong>AMOR, SABIDURÍA y LUZ</strong></p>
+            
+            <div class="photo-container">
+                <img src="https://raw.githubusercontent.com/erikavsanchezt-lab/Mis80/main/img/Marco.png" alt="Marco botánico dorado" class="botanic-frame">
+                <img src="https://raw.githubusercontent.com/erikavsanchezt-lab/Mis80/main/img/Abuelita.jpg" alt="Flor María 80 años" class="profile-photo">
+            </div>
+        </section>
 
-        <a class="btn" href="https://wa.me/573117266064?text=Hola%2C%20confirmo%20mi%20asistencia%20a%20los%2080%20años%20de%20Flor%20Mar%C3%ADa" target="_blank" rel="noopener">Confirmar asistencia</a>
+        <section id="mensaje1" class="section message-box reveal-item">
+            <p class="botanic-separator">***</p>
+            <p class="message-text">
+                Son 80 años llenos de amor, enseñanzas, fortaleza y momentos inolvidables.<br>
+                Dios nos ha bendecido con una madre y abuela maravillosa, y este día queremos honrar su historia, su dulzura y el inmenso amor que ha sembrado en cada corazón que ha tocado.<br>
+                ¡Acompáñanos a celebrar esta hermosa bendición que la vida nos regala!
+            </p>
+            <p class="botanic-separator">***</p>
+        </section>
 
-        <a class="btn outline" href="https://www.google.com/maps/place/Finca+San+Miguel/@5.0679203,-75.6838147,17z" target="_blank" rel="noopener">Cómo llegar</a>
+        <section id="detalles" class="section details-box reveal-item">
+            <h2>Detalles del Evento</h2>
+            
+            <div class="date-calendar">
+                <div class="month">Diciembre 2025</div>
+                <div class="day-wrapper">
+                    <span class="day-number">6</span>
+                    <span class="day-name">Sábado</span>
+                </div>
+            </div>
 
-        <div class="countdown" id="countdown" aria-live="polite">Calculando...</div>
-      </div>
-    </aside>
-  </div>
+            <h3>Falta para el Gran Día:</h3>
+            <div id="countdown" class="countdown-timer">
+                <div class="countdown-unit"><span class="days flip-number">00</span> Días</div>
+                <div class="countdown-unit"><span class="hours flip-number">00</span> Horas</div>
+                <div class="countdown-unit"><span class="minutes flip-number">00</span> Minutos</div>
+                <div class="countdown-unit"><span class="seconds flip-number">00</span> Segundos</div>
+            </div>
 
-  <footer>
-    <div>¡Acompáñanos a brindar por ella! 🥂</div>
-    <div style="font-size:13px;color:#827b70;margin-top:8px">Con cariño, la familia de Flor María</div>
-  </footer>
-</div>
+            <h3 class="location-name">Finca San Miguel</h3>
+            <div class="button-group">
+                <a href="https://www.google.com/maps/place/Finca+San+Miguel/@5.0679203,-75.6838147,17z/data=!3m1!4b1!4m6!3m5!1s0x8e47799c77fb84e5:0x8d07f8d132cbb4e5!8m2!3d5.0679203!4d-75.6812398!16s%2Fg%2F11yjsj3cgn?entry=ttu&g_ep=EgoyMDI1MTEwNS4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="btn btn-maps">Cómo llegar</a>
+                <a href="https://api.whatsapp.com/send/?phone=573117266064&text=Hola%2C+confirmo+mi+asistencia+a+los+80+a%C3%B1os+de+Flor+Mar%C3%ADa&type=phone_number&app_absent=0" target="_blank" class="btn btn-confirm">Confirmar asistencia</a>
+            </div>
+        </section>
 
-<!-- audio (catbox mp3) -->
-<audio id="bgAudio" loop>
-  <source src="https://files.catbox.moe/yogpbx.mp3" type="audio/mpeg">
-</audio>
-<button id="audioToggle" class="hidden" aria-label="Activar música">🎵</button>
-
-<script>
-/* --- Autoplay attempt + mobile fallback --- */
-const audio = document.getElementById('bgAudio');
-const audioBtn = document.getElementById('audioToggle');
-
-// Try to autoplay; if blocked, show button
-function tryPlayAudio() {
-  audio.play().then(()=> {
-    // playing
-    audioBtn.classList.add('hidden');
-  }).catch((e)=>{
-    // autoplay blocked -> show button so user can enable
-    audioBtn.classList.remove('hidden');
-  });
-}
-
-// Try once on load
-document.addEventListener('DOMContentLoaded', tryPlayAudio);
-
-// Also try when user interacts anywhere (safe)
-document.body.addEventListener('click', function handler(){
-  tryPlayAudio();
-  document.body.removeEventListener('click', handler);
-});
-
-// Button toggles play/pause
-audioBtn.addEventListener('click', function(){
-  if (audio.paused) { audio.play(); audioBtn.textContent = '⏸'; }
-  else { audio.pause(); audioBtn.textContent = '🎵'; }
-});
-
-/* --- Countdown to event (06 Dec 2025 15:00 local) --- */
-(function startCountdown(){
-  const target = new Date('2025-12-06T15:00:00'); // ISO local time
-  const el = document.getElementById('countdown');
-  function tick(){
-    const now = new Date();
-    let diff = target - now;
-    if (diff <= 0) { el.textContent = '¡Hoy es el gran día!'; return; }
-    const days = Math.floor(diff / (1000*60*60*24));
-    diff -= days*(1000*60*60*24);
-    const hours = Math.floor(diff / (1000*60*60));
-    diff -= hours*(1000*60*60);
-    const mins = Math.floor(diff / (1000*60));
-    diff -= mins*(1000*60);
-    const secs = Math.floor(diff/1000);
-    el.textContent = `${days} días · ${hours}h ${mins}m ${secs}s`;
-  }
-  tick();
-  setInterval(tick, 1000);
-})();
-</script>
-
+        <section id="cierre" class="section message-box closure-box reveal-item">
+            <p class="botanic-separator-bold">⚜️</p>
+            <p class="quote-text type-effect">
+                “Los años no se cuentan, se celebran. Los momentos no se guardan, se atesoran. ¡Y la vida no solo se vive, sino que se agradece!”
+            </p>
+            <p class="message-text">
+                Madre, abuela y amiga. Gracias por ser nuestro ejemplo, nuestro abrazo seguro y nuestra mayor inspiración.
+            </p>
+            <p class="botanic-separator-bold">⚜️</p>
+        </section>
+        
+    </main>
+    
+    <script src="script.js"></script>
 </body>
 </html>
