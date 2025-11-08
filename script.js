@@ -3,10 +3,14 @@ const audio = document.getElementById('background-music');
 const musicControl = document.getElementById('music-control');
 const musicIcon = document.getElementById('music-icon');
 
-// Intentar la reproducción automática (fallará en la mayoría de navegadores, pero no importa)
+// Configuración inicial del control
 audio.volume = 0.5; 
+musicIcon.textContent = '▶️'; // Muestra Play inicialmente
+musicControl.title = 'Reproducir música de fondo';
+musicControl.style.color = 'var(--color-acento1)'; // Color Play
+
+// Intentar la reproducción automática (fallará, pero es el intento inicial)
 audio.play().catch(error => {
-    // Si falla, el control manual queda visible para el usuario
     console.log("Auto-play blocked, user interaction required.");
 });
 
@@ -16,12 +20,12 @@ musicControl.addEventListener('click', () => {
         audio.play();
         musicIcon.textContent = '⏸️'; // Icono de Pausa
         musicControl.title = 'Pausar música';
-        musicControl.style.color = 'var(--color-acento2)'; // Usa acento 2 cuando está activo
+        musicControl.style.color = 'var(--color-acento2)'; // Color activo
     } else {
         audio.pause();
         musicIcon.textContent = '▶️'; // Icono de Play
         musicControl.title = 'Reproducir música de fondo';
-        musicControl.style.color = 'var(--color-acento1)'; // Vuelve a acento 1
+        musicControl.style.color = 'var(--color-acento1)'; // Color inactivo
     }
 });
 
@@ -105,11 +109,10 @@ window.addEventListener('scroll', checkReveal);
 window.addEventListener('load', checkReveal); 
 
 
-// --- EFECTO TYPEWRITER (Máquina de Escribir) para la Cita de Cierre ---
+// --- EFECTO TYPEWRITER (Máquina de Escribir) ---
 const quoteElement = document.querySelector('.type-effect');
 const quoteText = quoteElement.textContent;
 
-// Solo iniciamos el efecto si el elemento existe
 if (quoteElement) {
     quoteElement.textContent = ''; 
 
@@ -119,11 +122,10 @@ if (quoteElement) {
             if (i < quoteText.length) {
                 quoteElement.textContent += quoteText.charAt(i);
                 i++;
-                setTimeout(type, 50); // Velocidad de la escritura
+                setTimeout(type, 50); 
             }
         }
         type(); 
     }
-    // Activamos la escritura con un pequeño retraso
     setTimeout(typeWriterEffect, 2000);
 }
