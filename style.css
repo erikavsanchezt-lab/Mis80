@@ -1,79 +1,290 @@
 /* Paleta de Colores y Tipografía */
-/* ... tus :root variables se mantienen ... */
-
-/* Estilo Base y Textura de Lino */
-/* ... body y .section se mantienen ... */
-
-/* --- SECCIÓN DETALLES (Mayor Foco en la Fecha) --- */
-
-.date-calendar {
-    /* FIX: Borde más grueso y contraste para mayor foco */
-    display: inline-block;
-    border: 3px solid var(--color-acento1); /* Borde más visible con acento 1 */
-    padding: 10px 20px;
-    margin-bottom: 30px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra sutil */
-    background-color: #fff;
-    transform: scale(1.05); /* FIX: Escalar ligeramente para mayor foco visual */
+:root {
+    --color-fondo: #F5F5DC; 
+    --color-acento1: #B06575; /* Rosado/Maroon (Primario) */
+    --color-acento2: #6D8B74; /* Verde Muted/Salvia (Secundario) */
+    --color-texto: #444444; /* Texto más suave que el negro puro */
+    --color-light-bg: #FFFFFF; /* Fondo de cajas de mensaje */
+    --color-dorado: #D4AF37;
+    --font-principal: 'Playfair Display', serif;
 }
-.month {
-    font-size: 1.3em; /* Más grande */
-    color: var(--color-acento2); /* Color verde */
-    margin-bottom: 5px;
+
+/* Estilo Base y Base General */
+body {
+    font-family: var(--font-principal);
+    color: var(--color-texto);
+    margin: 0;
+    line-height: 1.7; /* Mayor interlineado para lectura moderna */
+    text-align: center;
+    font-size: 18px; 
+    
+    background-color: var(--color-fondo); 
+    background-image: url('https://raw.githubusercontent.com/erikavsanchezt-lab/Mis80/main/img/Fondo2.png'); 
+    background-repeat: no-repeat;
+    background-size: cover; 
+    background-position: center center; 
+    background-attachment: fixed;
+}
+
+.section {
+    padding: 80px 5%; /* Más padding para mayor espacio en blanco */
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+/* --- TIPOGRAFÍA Y JERARQUÍA --- */
+h1, h2 {
     font-weight: 700;
+    line-height: 1.1;
 }
-.day-wrapper {
+.main-title {
+    font-size: 3em; 
+    color: var(--color-acento1);
+    margin-bottom: 0.5em;
+}
+.subtitle {
+    font-size: 1.3em;
+    font-style: italic;
+    color: var(--color-acento2);
+    margin-bottom: 2em;
+}
+
+/* --- MENSAJES Y CAJAS MODERNAS --- */
+.message-box {
+    background-color: var(--color-light-bg);
+    padding: 60px 5%; 
+    border-radius: 12px; 
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08); 
+    margin: 40px auto; 
+}
+.message-text {
+    font-size: 1.1em;
+    max-width: 750px;
+    margin: 20px auto;
+}
+.quote-text {
+    font-style: italic;
+    font-size: 1.4em;
+    color: var(--color-acento2);
+    margin: 30px auto;
+}
+
+/* Estilo mínimo para los separadores */
+.botanic-separator, .botanic-separator-bold {
+    font-size: 1.5em;
+    color: var(--color-dorado);
+    margin: 20px auto;
+}
+
+/* --- NAV BAR (Fixed & Responsive) --- */
+.navbar {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background-color: rgba(245, 245, 220, 0.95); 
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 15px 5%; 
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+}
+
+/* Menu Toggle y Enlaces (Mobile First) */
+.menu-toggle {
+    display: block; 
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    z-index: 1001; 
+}
+.menu-toggle .bar {
+    display: block;
+    width: 25px;
+    height: 3px;
+    margin: 5px auto;
+    background-color: var(--color-acento1);
+    transition: all 0.3s ease-in-out;
+}
+.menu-toggle.active .bar:nth-child(2) { opacity: 0; }
+.menu-toggle.active .bar:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+.menu-toggle.active .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+.nav-links-container {
+    display: none; 
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(245, 245, 220, 0.98); 
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+}
+.nav-links-container.active {
+    display: flex; 
+}
+.nav-links-container a {
+    font-size: 1.8em;
+    padding: 15px 0;
+    color: var(--color-texto);
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+/* Control de Música */
+.music-control {
+    background-color: transparent; 
+    color: var(--color-acento1); 
+    width: 30px; 
+    height: 30px;
+    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-}
-.day-number {
-    font-size: 4em; /* Número más grande */
-    font-weight: 700;
-    color: #fff;
-    background-color: var(--color-acento1); 
-    border-radius: 50%;
-    width: 90px; /* Más grande */
-    height: 90px; /* Más grande */
-    line-height: 90px;
-    margin-right: 15px;
-}
-.day-name {
-    font-size: 1.6em; /* Nombre más grande */
-    color: var(--color-acento1);
+    cursor: pointer;
+    transition: color 0.3s;
+    z-index: 1001;
 }
 
-/* --- UBICACIÓN CON ÍCONO --- */
-.location-name {
-    font-size: 1.8em;
-    color: var(--color-texto);
-    margin-top: 30px;
+/* --- OVERLAY DE MÚSICA --- */
+#welcome-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--color-fondo); 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    cursor: pointer;
+    transition: opacity 0.8s ease-out; 
 }
-/* FIX: Añadir el ícono de ubicación antes del texto */
+.hidden-overlay {
+    opacity: 0 !important;
+    pointer-events: none !important;
+    visibility: hidden; 
+}
+#welcome-overlay p {
+    font-size: 1.5em;
+    color: white; 
+    background: var(--color-acento1); 
+    padding: 15px 30px;
+    border-radius: 5px;
+    animation: pulse 1.5s infinite; 
+}
+@keyframes pulse {
+    0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(176, 101, 117, 0.7); }
+    70% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(176, 101, 117, 0); }
+    100% { transform: scale(1); }
+}
+
+
+/* --- SECCIÓN BIENVENIDA (FOTO INTEGRADA) --- */
+.photo-container {
+    width: 380px; 
+    height: 380px;
+    margin: 40px auto 0; 
+}
+.profile-photo-with-frame { 
+    width: 100%; 
+    height: 100%;
+    object-fit: contain; 
+    display: block;
+}
+
+
+/* --- SECCIÓN DETALLES (Calendario, Ubicación, Botones) --- */
+.details-box h2 {
+    font-size: 2.5em;
+    color: var(--color-acento1);
+    margin-bottom: 20px;
+}
+.location-name {
+    font-size: 1.5em; 
+    font-weight: bold;
+    color: var(--color-acento2);
+    margin-top: 40px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+/* Icono de ubicación */
 .location-name::before {
-    content: '📍'; /* Icono de ubicación */
+    content: '📍';
     margin-right: 10px;
     font-size: 1.2em;
     vertical-align: middle;
 }
 
-/* --- BOTONES DE ACCIÓN (Mejor Visibilidad) --- */
+/* REDISEÑO DEL CALENDARIO (Foco visual) */
+.date-calendar {
+    border: none;
+    padding: 0;
+    margin: 40px auto;
+    box-shadow: none;
+    background-color: transparent;
+    max-width: 400px;
+}
+.month {
+    font-size: 1.5em; 
+    color: var(--color-acento2); 
+    font-weight: 400; 
+    margin-bottom: 15px;
+}
+.day-number {
+    font-size: 5em; 
+    font-weight: 700;
+    color: white;
+    background-color: var(--color-acento1); 
+    border-radius: 8px; 
+    width: 100px; 
+    height: 100px; 
+    line-height: 100px;
+    margin-right: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+.day-name {
+    font-size: 1.8em; 
+    color: var(--color-acento1);
+}
+
+/* CUENTA REGRESIVA */
+.countdown-timer {
+    gap: 30px; 
+    margin: 30px auto 40px;
+}
+.countdown-unit {
+    background: var(--color-acento2);
+    color: white;
+    padding: 18px 10px; 
+    border-radius: 10px;
+    min-width: 90px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+.countdown-unit span {
+    font-size: 3em; 
+}
+
+/* BOTONES DE ACCIÓN (Modernos, tipo píldora) */
 .button-group {
-    margin-top: 30px;
+    margin-top: 40px;
+    gap: 20px; 
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    gap: 15px; /* Espacio entre los botones */
 }
 .btn {
-    text-decoration: none;
-    padding: 15px 30px; /* FIX: Botones más grandes */
-    border-radius: 8px; /* Bordes más suaves */
+    text-decoration: none !important;
+    padding: 12px 30px; 
+    border-radius: 30px; /* Forma de píldora moderna */
     font-weight: bold;
-    display: inline-flex; /* Usar flex para centrar contenido si fuera necesario */
-    align-items: center;
-    transition: transform 0.3s, background-color 0.3s, box-shadow 0.3s;
-    text-transform: uppercase; /* Para un look más formal */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    text-transform: uppercase;
     letter-spacing: 1px;
 }
 .btn-maps {
@@ -84,16 +295,67 @@
     background-color: var(--color-acento1); /* Rosado/Maroon */
     color: white;
 }
-/* FIX: Asegurar que el subrayado desaparezca */
 .btn:hover {
-    text-decoration: none;
-    transform: scale(1.05); 
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+    transform: translateY(-2px) scale(1.02); 
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.25);
 }
 
-/* FIX: Estilos de texto por defecto para los enlaces que se veían mal */
-.btn-maps, .btn-confirm {
-    text-decoration: none !important;
+/* --- SCROLL REVEAL Y FLIP ANIMATION --- */
+.reveal-item {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+.reveal-item.active {
+    opacity: 1;
+    transform: translateY(0);
 }
 
-/* ... el resto de tu CSS (cuenta regresiva, animaciones, etc.) se mantiene ... */
+.flip-number {
+    position: relative;
+    display: inline-block;
+    perspective: 500px; 
+    overflow: hidden; 
+}
+.flip-number::before {
+    content: attr(data-old-value); 
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--color-acento1); 
+    color: white;
+    padding-top: 5px;
+    transform-origin: center bottom;
+    transform: rotateX(0deg);
+    backface-visibility: hidden;
+    transition: transform 0.5s ease-in-out;
+}
+.flip-number.active::before {
+    transform: rotateX(-180deg); 
+}
+
+/* Responsive para Navbar */
+@media (min-width: 769px) {
+    .menu-toggle {
+        display: none; 
+    }
+    .nav-links-container {
+        display: flex; 
+        position: static;
+        flex-direction: row;
+        width: auto;
+        height: auto;
+        background-color: transparent;
+        box-shadow: none;
+    }
+    .nav-links-container a {
+        font-size: 1.1em;
+        padding: 5px 15px;
+        color: var(--color-acento1);
+    }
+    .navbar {
+        justify-content: space-between; 
+    }
+}
