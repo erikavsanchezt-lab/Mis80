@@ -1,14 +1,14 @@
 /* Paleta de Colores y Tipografía */
 :root {
-    --color-fondo: #F5F5DC; /* Crema/Lino */
-    --color-acento1: #B06575; /* Rosado/Maroon */
-    --color-acento2: #6D8B74; /* Verde Muted/Salvia */
+    --color-fondo: #F5F5DC; 
+    --color-acento1: #B06575; 
+    --color-acento2: #6D8B74; 
     --color-texto: #333333;
     --color-dorado: #D4AF37;
     --font-principal: 'Playfair Display', serif;
 }
 
-/* Estilo Base y Textura de Lino CORREGIDA (de tu solicitud anterior) */
+/* Estilo Base y Textura de Lino (FIX: Cover y No-Repeat) */
 body {
     font-family: var(--font-principal);
     color: var(--color-texto);
@@ -16,16 +16,19 @@ body {
     line-height: 1.6;
     text-align: center;
     
-    /* Fondo FIX */
     background-color: var(--color-fondo); 
     background-image: url('https://raw.githubusercontent.com/erikavsanchezt-lab/Mis80/main/img/Fondo2.png'); 
     background-repeat: no-repeat;
-    background-size: cover; 
+    background-size: cover; /* FIX: Cubrir todo el ancho */
     background-position: center center; 
     background-attachment: fixed;
 }
 
-/* 1. ESTILO PARA EL OVERLAY DE MÚSICA */
+.section {
+    padding: 60px 5%; 
+}
+
+/* --- OVERLAY DE MÚSICA --- */
 #welcome-overlay {
     position: fixed;
     top: 0;
@@ -39,140 +42,158 @@ body {
     align-items: center;
     z-index: 9999;
     cursor: pointer;
-    transition: opacity 0.8s ease-out; /* Transición suave al ocultar */
+    transition: opacity 0.8s ease-out; 
 }
-
-/* Clase para ocultar el overlay después del click */
 .hidden-overlay {
-    opacity: 0;
-    pointer-events: none; /* Permite hacer click en el contenido de abajo */
+    opacity: 0 !important;
+    pointer-events: none !important;
 }
-
 #welcome-overlay p {
     font-size: 1.5em;
-    color: var(--color-acento2);
+    color: white; /* Letras blancas para contraste */
+    background: var(--color-acento1); /* Fondo del mensaje con acento */
     padding: 15px 30px;
-    border: 2px solid var(--color-acento2);
     border-radius: 5px;
-    background: rgba(255, 255, 255, 0.8);
-    animation: pulse 1.5s infinite; /* Animación para llamar la atención */
+    animation: pulse 1.5s infinite; 
 }
-
-/* Keyframes para la animación del overlay */
 @keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.05); }
+    0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(176, 101, 117, 0.7); }
+    70% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(176, 101, 117, 0); }
     100% { transform: scale(1); }
 }
 
-/* 2. MENU HAMBURGUESA BASE */
-header {
-    /* Asegúrate de que el header permita posicionar el toggle */
-    position: relative;
-    z-index: 100; 
+/* --- NAV BAR (FIX: Posicionamiento para Hamburguesa) --- */
+.navbar {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background-color: rgba(245, 245, 220, 0.95); 
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 15px 5%; 
+    display: flex;
+    justify-content: flex-end; /* Alinea los controles a la derecha */
+    align-items: center;
 }
 
-#menu-toggle {
-    display: none; /* Ocultar por defecto en escritorio */
+/* --- MENÚ HAMBURGUESA (FIX: Estilos base) --- */
+.menu-toggle {
+    display: block; 
     background: none;
     border: none;
     cursor: pointer;
     padding: 10px;
-    position: absolute; /* Posicionar el botón */
-    top: 15px; 
-    right: 15px;
-    z-index: 101; 
+    z-index: 1001; 
 }
-
-#menu-toggle .bar {
+.menu-toggle .bar {
     display: block;
     width: 25px;
     height: 3px;
     margin: 5px auto;
-    background-color: var(--color-acento2);
+    background-color: var(--color-acento1);
     transition: all 0.3s ease-in-out;
 }
+.menu-toggle.active .bar:nth-child(2) { opacity: 0; }
+.menu-toggle.active .bar:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+.menu-toggle.active .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
 
-/* Estilos de NAV por defecto (Mobile First) */
-#navbar {
-    display: none; /* Ocultar el menú en mobile por defecto */
-    position: absolute;
-    top: 0; 
-    right: 0;
+
+/* Contenedor de Enlaces (El menú que se oculta/muestra) */
+.nav-links-container {
+    display: none; /* Inicia oculto en móvil */
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
-    background-color: rgba(245, 245, 220, 0.95); /* Fondo semitransparente */
-    padding-top: 60px; /* Espacio para el header */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    z-index: 99;
-    min-height: 100vh; /* Para que cubra toda la pantalla al abrirse */
-}
-
-#navbar.active {
-    display: block; /* Muestra el menú cuando está activo */
-}
-
-#navbar ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
+    height: 100%;
+    background-color: rgba(245, 245, 220, 0.98); 
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
 }
-
-#navbar ul li a {
-    display: block;
-    padding: 15px;
-    text-decoration: none;
+.nav-links-container.active {
+    display: flex; /* Se muestra al abrir */
+}
+.nav-links-container a {
+    font-size: 1.8em;
+    padding: 15px 0;
     color: var(--color-texto);
-    font-size: 1.2em;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    text-decoration: none;
+    transition: color 0.3s;
 }
 
+/* --- CONTROL DE MÚSICA --- */
+.music-control {
+    background-color: transparent; 
+    color: var(--color-acento1); 
+    width: 30px; 
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: color 0.3s;
+    z-index: 1001;
+}
 
-/* 3. SCROLL REVEAL (Animaciones de aparición) */
-/* Clase inicial (oculto y listo para animar) */
-.reveal {
+/* --- SECCIÓN BIENVENIDA (FIX: Posicionamiento del Marco) --- */
+.photo-container {
     position: relative;
-    opacity: 0;
-    transform: translateY(20px); /* Ligeramente desplazado hacia abajo */
-    transition: all 1s ease-out;
+    display: inline-block;
+}
+.profile-photo {
+    width: 280px;
+    height: 280px;
+    object-fit: cover;
+    border-radius: 50%; 
+    border: 5px solid var(--color-fondo); 
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    z-index: 5; 
+}
+.botanic-frame {
+    position: absolute;
+    /* FIX: Ajuste para que el marco envuelva bien la foto circular */
+    top: -45px; 
+    left: -45px;
+    width: 370px; 
+    height: 370px;
+    z-index: 10; /* Encima de la foto */
+    pointer-events: none; 
 }
 
-/* Clase activa (visible) */
-.reveal.active {
+/* --- ANIMACIÓN FLIP y SCROLL REVEAL (Códigos funcionales) --- */
+.reveal-item {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+.reveal-item.active {
     opacity: 1;
     transform: translateY(0);
 }
 
-/* 4. MEDIA QUERY PARA ESCRITORIO (REVELAR EL MENÚ ESTÁNDAR) */
-@media (max-width: 768px) {
-    /* En móviles, muestra el botón y oculta el nav por defecto */
-    #menu-toggle {
-        display: block;
-    }
-    #navbar {
-        display: none; /* Se controla con JS */
-        
-    }
+.flip-number {
+    position: relative;
+    display: inline-block;
+    perspective: 500px; 
+    overflow: hidden; 
 }
-
-@media (min-width: 769px) {
-    /* En escritorio, oculta el botón y muestra el nav de forma estándar */
-    #menu-toggle {
-        display: none;
-    }
-    #navbar {
-        display: flex; /* O como lo tengas configurado para escritorio */
-        position: static;
-        padding-top: 0;
-        min-height: auto;
-    }
-    #navbar ul {
-        flex-direction: row;
-        justify-content: center;
-        width: 100%;
-    }
-    #navbar ul li a {
-        border-bottom: none;
-    }
+.flip-number::before {
+    content: attr(data-old-value); 
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--color-acento1); 
+    color: white;
+    padding-top: 5px;
+    transform-origin: center bottom;
+    transform: rotateX(0deg);
+    backface-visibility: hidden;
+    transition: transform 0.5s ease-in-out;
+}
+.flip-number.active::before {
+    transform: rotateX(-180deg); 
 }
