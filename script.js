@@ -25,8 +25,8 @@ function startMusicAndHideOverlay() {
             musicStarted = true;
             if (musicIcon) musicIcon.textContent = '⏸️'; 
         }).catch(error => {
-            // La reproducción fue bloqueada (típico NotAllowedError)
-            console.warn("La reproducción de audio fue bloqueada.", error);
+            // La reproducción fue bloqueada 
+            console.warn("La reproducción de audio fue bloqueada. El overlay se oculta, usar control manual.", error);
             
             // Ocultar el overlay de todas formas, para no frustrar al usuario
             overlay.classList.add('hidden-overlay');
@@ -64,64 +64,8 @@ if (musicControl) {
 
 
 // =========================================================
-// 2. CUENTA REGRESIVA (FIX: Fecha 6 de Diciembre de 2025)
+// 2. CUENTA REGRESIVA - Lógica eliminada, ahora se usa IFRAME
 // =========================================================
-// FECHA DEL EVENTO CORREGIDA 
-const eventDate = new Date("Dec 6, 2025 18:00:00").getTime(); 
-
-const countdownUnits = {
-    days: document.getElementById('days'),
-    hours: document.getElementById('hours'),
-    minutes: document.getElementById('minutes'),
-    seconds: document.getElementById('seconds')
-};
-
-function updateCountdown() {
-    const now = new Date().getTime();
-    const distance = eventDate - now;
-
-    if (distance < 0) {
-        clearInterval(countdownInterval);
-        const countdownElement = document.getElementById("countdown");
-        if(countdownElement) countdownElement.innerHTML = "<h2>¡CELEBRANDO!</h2>";
-        return;
-    }
-
-    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-    const pad = num => num < 10 ? '0' + num : num.toString();
-
-    function updateAndFlip(element, newValue) {
-        if (!element) return; 
-        
-        const currentValue = element.textContent;
-        const paddedNewValue = pad(newValue);
-
-        if (currentValue !== paddedNewValue) {
-            element.setAttribute('data-old-value', currentValue);
-            element.textContent = paddedNewValue;
-            
-            element.classList.remove('active'); 
-            void element.offsetWidth; // Forzar reflow para animación
-            element.classList.add('active'); 
-
-            setTimeout(() => {
-                 element.classList.remove('active'); 
-            }, 500); 
-        }
-    }
-
-    updateAndFlip(countdownUnits.days, days);
-    updateAndFlip(countdownUnits.hours, hours);
-    updateAndFlip(countdownUnits.minutes, minutes);
-    updateAndFlip(countdownUnits.seconds, seconds);
-}
-
-updateCountdown();
-const countdownInterval = setInterval(updateCountdown, 1000);
 
 
 // =========================================================
@@ -187,7 +131,7 @@ if (quoteElement) {
         setTimeout(type, 2500);
     }
     
-    // Iniciar el efecto después de un retraso inicial para que no compita con el overlay
+    // Iniciar el efecto después de un retraso inicial
     setTimeout(() => {
         if (!overlay || overlay.classList.contains('hidden-overlay')) {
             typeWriterEffect();
