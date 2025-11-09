@@ -32,13 +32,12 @@ body {
     margin: 0 auto;
 }
 
-/* --- FIX PARA WIDGET DE CUENTA REGRESIVA --- */
-/* Asegura que el widget tenga espacio y elimina el subrayado si es un enlace */
+/* --- FIX PARA WIDGET DE CUENTA REGRESIVA (RESPONSIVO) --- */
 .countdown-timer {
     width: 100% !important; /* Fuerza el ancho del contenedor */
-    max-width: 450px; /* Limita el ancho en pantallas grandes si es necesario */
+    max-width: 900px; /* Permite un tamaño grande en desktop si se necesita */
     display: block; /* Asegura que tome el ancho */
-    text-decoration: none !important; /* Elimina el subrayado (visto en la captura) */
+    text-decoration: none !important; /* Elimina el subrayado */
     margin: 0 auto; /* Centra el bloque */
 }
 
