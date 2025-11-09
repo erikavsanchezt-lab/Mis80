@@ -1,5 +1,5 @@
 // =========================================================
-// 1. MÚSICA DE FONDO (INICIAR CON CLICK/TAP EN OVERLAY)
+// 1. MÚSICA DE FONDO (INICIAR CON CLICK/TAP EN OVERLAY) - FIX ROBUSTO
 // =========================================================
 const audio = document.getElementById('background-music');
 const musicControl = document.getElementById('music-control');
@@ -8,36 +8,53 @@ const overlay = document.getElementById('welcome-overlay');
 
 let musicStarted = false;
 
+// Función para iniciar la música y ocultar el overlay
 function startMusicAndHideOverlay() {
+    // Solo se ejecuta la primera vez
     if (musicStarted) return; 
 
     audio.volume = 0.5; 
-    audio.play()
-        .then(() => {
+    
+    // Intentar reproducir y manejar la promesa de reproducción (necesario por las políticas del navegador)
+    const playPromise = audio.play();
+
+    if (playPromise !== undefined) {
+        playPromise.then(_ => {
+            // La reproducción comenzó correctamente
             overlay.classList.add('hidden-overlay');
             musicStarted = true;
             if (musicIcon) musicIcon.textContent = '⏸️'; 
-        })
-        .catch(error => {
+        }).catch(error => {
+            // La reproducción fue bloqueada (típico NotAllowedError)
+            console.warn("La reproducción de audio fue bloqueada.", error);
+            
+            // Ocultar el overlay de todas formas, para no frustrar al usuario
             overlay.classList.add('hidden-overlay');
             musicStarted = true;
-            console.error("Música bloqueada. Usar el control manual si es visible.", error);
+            if (musicIcon) musicIcon.textContent = '▶️'; 
         });
+    }
 
+    // Remover el listener para que el clic solo sea efectivo una vez en el overlay
     overlay.removeEventListener('click', startMusicAndHideOverlay);
+    overlay.removeEventListener('touchstart', startMusicAndHideOverlay);
 }
 
 if (overlay) {
     overlay.addEventListener('click', startMusicAndHideOverlay);
+    overlay.addEventListener('touchstart', startMusicAndHideOverlay); 
 }
 
 // Control manual (Play/Pause)
 if (musicControl) {
     musicControl.addEventListener('click', () => {
         if (audio.paused) {
-            audio.play();
-            musicStarted = true; 
-            musicIcon.textContent = '⏸️'; 
+            audio.play().then(() => {
+                musicStarted = true; 
+                musicIcon.textContent = '⏸️'; 
+            }).catch(error => {
+                console.error("Fallo en el control manual:", error);
+            });
         } else {
             audio.pause();
             musicIcon.textContent = '▶️'; 
@@ -47,9 +64,9 @@ if (musicControl) {
 
 
 // =========================================================
-// 2. CUENTA REGRESIVA (FIX: Fecha y Lógica de Flips)
+// 2. CUENTA REGRESIVA (FIX: Fecha 6 de Diciembre de 2025)
 // =========================================================
-// FECHA DEL EVENTO CORREGIDA A DICIEMBRE 6 DE 2025
+// FECHA DEL EVENTO CORREGIDA 
 const eventDate = new Date("Dec 6, 2025 18:00:00").getTime(); 
 
 const countdownUnits = {
@@ -170,7 +187,7 @@ if (quoteElement) {
         setTimeout(type, 2500);
     }
     
-    // Iniciar el efecto después de que el overlay desaparezca o con un retraso inicial
+    // Iniciar el efecto después de un retraso inicial para que no compita con el overlay
     setTimeout(() => {
         if (!overlay || overlay.classList.contains('hidden-overlay')) {
             typeWriterEffect();
