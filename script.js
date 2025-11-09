@@ -1,5 +1,5 @@
 // =========================================================
-// 1. MÚSICA DE FONDO (INICIAR CON CLICK/TAP)
+// 1. MÚSICA DE FONDO (INICIAR CON CLICK/TAP EN OVERLAY)
 // =========================================================
 const audio = document.getElementById('background-music');
 const musicControl = document.getElementById('music-control');
@@ -10,40 +10,37 @@ let musicStarted = false;
 
 // Función para iniciar la música y ocultar el overlay
 function startMusicAndHideOverlay() {
-    if (musicStarted) return; // Evitar doble ejecución
+    if (musicStarted) return; 
 
-    audio.volume = 0.5; // Ajustar volumen si es necesario
+    audio.volume = 0.5; 
     audio.play()
         .then(() => {
-            // Éxito: Ocultar overlay
             overlay.classList.add('hidden-overlay');
             musicStarted = true;
-            // Actualizar control de música si lo tienes visible
             if (musicIcon) musicIcon.textContent = '⏸️'; 
-            console.log("Música iniciada por interacción del usuario.");
         })
         .catch(error => {
-            // Falla (caso raro, pero se oculta el overlay de todas formas)
+            // Si falla (navegador muy estricto), aún ocultamos el overlay
             overlay.classList.add('hidden-overlay');
             musicStarted = true;
-            console.error("No se pudo iniciar la música:", error);
+            console.error("Música bloqueada. Use el control manual.", error);
         });
 
     // Remover el listener inmediatamente después de la primera interacción
     overlay.removeEventListener('click', startMusicAndHideOverlay);
 }
 
-// Inicializar el listener del overlay si existe
+// Inicializar el listener del overlay
 if (overlay) {
     overlay.addEventListener('click', startMusicAndHideOverlay);
 }
 
-// Control manual (si tienes un botón Play/Pause aparte del overlay)
+// Control manual (Play/Pause)
 if (musicControl) {
     musicControl.addEventListener('click', () => {
         if (audio.paused) {
             audio.play();
-            musicStarted = true; 
+            musicStarted = true;
             musicIcon.textContent = '⏸️'; 
         } else {
             audio.pause();
@@ -54,95 +51,129 @@ if (musicControl) {
 
 
 // =========================================================
-// 2. CUENTA REGRESIVA (FIX)
+// 2. CUENTA REGRESIVA (FIX: IDs de elementos)
 // =========================================================
-function updateCountdown() {
-    // Establece la fecha objetivo (ejemplo: Mayo 18, 2026 a las 11:00 AM)
-    // **IMPORTANTE**: Reemplaza esta fecha con la real de tu evento.
-    const targetDate = new Date("May 18, 2026 11:00:00").getTime();
-    const now = new Date().getTime();
-    const distance = targetDate - now;
+const eventDate = new Date("Dec 6, 2025 18:00:00").getTime(); // Sábado 6 de diciembre de 2025 (18:00)
 
-    // Lógica para detener la cuenta regresiva si ya pasó la fecha
+const countdownUnits = {
+    days: document.getElementById('days'),
+    hours: document.getElementById('hours'),
+    minutes: document.getElementById('minutes'),
+    seconds: document.getElementById('seconds')
+};
+
+function updateCountdown() {
+    const now = new Date().getTime();
+    const distance = eventDate - now;
+
     if (distance < 0) {
         clearInterval(countdownInterval);
-        document.getElementById("countdown-timer").innerHTML = "¡Es hoy!";
+        document.getElementById("countdown").innerHTML = "<h2>¡CELEBRANDO!</h2>";
         return;
     }
 
-    // Cálculos de tiempo
     const days = Math.floor(distance / (1000 * 60 * 60 * 24));
     const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
     const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
     const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-    // Actualizar el DOM
-    document.getElementById("days").textContent = days;
-    document.getElementById("hours").textContent = hours;
-    document.getElementById("minutes").textContent = minutes;
-    document.getElementById("seconds").textContent = seconds;
+    const pad = num => num < 10 ? '0' + num : num.toString();
+
+    // Función para actualizar, guardar el valor anterior, y aplicar el 'flip'
+    function updateAndFlip(element, newValue) {
+        // Asegurarse de que el elemento exista antes de intentar manipularlo
+        if (!element) return; 
+        
+        const currentValue = element.textContent;
+        const paddedNewValue = pad(newValue);
+
+        if (currentValue !== paddedNewValue) {
+            element.setAttribute('data-old-value', currentValue);
+            element.textContent = paddedNewValue;
+            
+            element.classList.remove('active'); 
+            void element.offsetWidth; 
+            element.classList.add('active'); 
+
+            setTimeout(() => {
+                 element.classList.remove('active'); 
+            }, 500); 
+        }
+    }
+
+    // Llamadas a la función de actualización
+    updateAndFlip(countdownUnits.days, days);
+    updateAndFlip(countdownUnits.hours, hours);
+    updateAndFlip(countdownUnits.minutes, minutes);
+    updateAndFlip(countdownUnits.seconds, seconds);
 }
 
-// Ejecutar la función inmediatamente y luego cada segundo
-updateCountdown(); 
+updateCountdown();
 const countdownInterval = setInterval(updateCountdown, 1000);
 
 
 // =========================================================
-// 3. MENÚ HAMBURGUESA (FIX)
+// 3. MENÚ HAMBURGUESA (FIX: Lógica de activación)
 // =========================================================
 const menuToggle = document.getElementById('menu-toggle');
-const navbar = document.getElementById('navbar');
-const navLinks = document.querySelectorAll('#navbar a'); // Para cerrar al hacer click
+const navLinksContainer = document.getElementById('nav-links-container');
+const navLinks = document.querySelectorAll('.nav-link');
 
 menuToggle.addEventListener('click', () => {
-    // Añade/quita la clase 'active' para mostrar/ocultar el nav
-    navbar.classList.toggle('active'); 
-    // Opcional: añadir clase al toggle para animar las barras (cerrar X)
-    menuToggle.classList.toggle('is-active'); 
+    menuToggle.classList.toggle('active');
+    navLinksContainer.classList.toggle('active'); // Usa 'active' para CSS
 });
 
-// Cierra el menú al hacer click en un enlace (útil en móvil)
+// Cierra el menú al hacer click en un enlace
 navLinks.forEach(link => {
     link.addEventListener('click', () => {
-        if (navbar.classList.contains('active')) {
-            navbar.classList.remove('active');
-            menuToggle.classList.remove('is-active');
-        }
+        navLinksContainer.classList.remove('active');
+        menuToggle.classList.remove('active');
     });
 });
 
 
 // =========================================================
-// 4. SCROLL REVEAL (ANIMACIONES DE APARICIÓN FIX)
+// 4. SCROLL REVEAL (ANIMACIONES DE APARICIÓN FIX: Clase 'reveal-item')
 // =========================================================
 function checkReveal() {
-    const sections = document.querySelectorAll('.reveal');
+    const revealItems = document.querySelectorAll('.reveal-item');
     const windowHeight = window.innerHeight;
 
-    sections.forEach(section => {
-        // Obtiene la posición de la sección con respecto al viewport
-        const sectionTop = section.getBoundingClientRect().top;
-        const revealPoint = 150; // Distancia desde abajo para que empiece a aparecer
+    revealItems.forEach(item => {
+        const itemTop = item.getBoundingClientRect().top;
+        const revealPoint = 150; 
 
-        // Si la parte superior de la sección está lo suficientemente alta...
-        if (sectionTop < windowHeight - revealPoint) {
-            section.classList.add('active');
+        if (itemTop < windowHeight - revealPoint) {
+            item.classList.add('active');
         } 
-        // Si quieres que desaparezca al volver a subir el scroll, usa la siguiente línea:
-        // else {
-        //     section.classList.remove('active');
-        // }
     });
 }
 
-// Ejecutar la función al cargar la página para ver elementos iniciales
-// y luego cada vez que se haga scroll.
 window.addEventListener('load', checkReveal);
 window.addEventListener('scroll', checkReveal);
 
 
 // =========================================================
-// 5. EFECTO MAQUINA DE ESCRIBIR (Typewriter) - Si lo tienes
+// 5. EFECTO MAQUINA DE ESCRIBIR (Typewriter)
 // =========================================================
-// (Mantén el código de tu efecto Typewriter si lo deseas)
+const quoteElement = document.querySelector('.type-effect');
+
+if (quoteElement) {
+    const quoteText = quoteElement.textContent;
+    quoteElement.textContent = ''; 
+
+    function typeWriterEffect() {
+        let i = 0;
+        function type() {
+            if (i < quoteText.length) {
+                quoteElement.textContent += quoteText.charAt(i);
+                i++;
+                setTimeout(type, 50); 
+            }
+        }
+        type(); 
+    }
+    // Retraso para que el usuario pueda ver la animación
+    setTimeout(typeWriterEffect, 2500);
+}
