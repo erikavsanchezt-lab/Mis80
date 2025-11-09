@@ -1,5 +1,5 @@
 // =========================================================
-// 1. MÚSICA DE FONDO (INICIAR CON CLICK/TAP EN OVERLAY) - FIX FINAL
+// 1. MÚSICA DE FONDO Y CONTROL DE OVERLAY (Lógica simplificada para Autoplay)
 // =========================================================
 const audio = document.getElementById('background-music');
 const musicControl = document.getElementById('music-control');
@@ -8,67 +8,68 @@ const overlay = document.getElementById('welcome-overlay');
 
 let musicStarted = false;
 
-// --- Función 1: Ocultar la máscara de forma inmediata y remover listeners ---
-function hideOverlay() {
+// --- Función para manejar el toque/click en el Overlay (Intento de Autoplay) ---
+function handleOverlayClick() {
+    
+    // 1. Ocultar el overlay de forma inmediata
     if (overlay) {
         overlay.classList.add('hidden-overlay');
-        
-        // Remover listeners para evitar intentos repetidos
-        overlay.removeEventListener('click', handleOverlayInteraction);
-        overlay.removeEventListener('touchstart', handleOverlayInteraction);
+        overlay.removeEventListener('click', handleOverlayClick);
+        overlay.removeEventListener('touchstart', handleOverlayClick); // Mantener por seguridad
     }
-}
-
-// --- Función 2: Solo intenta reproducir la música ---
-function tryToPlayMusic() {
-    if (musicStarted || !audio) return; 
-    musicStarted = true; 
-
-    audio.volume = 0.5; 
-    const playPromise = audio.play();
-
-    if (playPromise !== undefined) {
-        playPromise.then(_ => {
-            if (musicIcon) musicIcon.textContent = '⏸️'; 
-        }).catch(error => {
-            // El navegador bloqueó el audio. El icono se queda en Play (▶️).
-            console.warn("La reproducción de audio fue bloqueada. Usar control manual.", error);
-            if (musicIcon) musicIcon.textContent = '▶️'; 
-        });
-    }
-}
-
-// --- Función 3: Maneja la interacción (el click/touch) ---
-function handleOverlayInteraction() {
-    // CRÍTICO: Primero escondemos la máscara, luego intentamos el audio
-    hideOverlay();
-    tryToPlayMusic();
-}
-
-// SOLUCIÓN DE EMERGENCIA: Forzar cierre del overlay después de 5 segundos
-if (overlay) {
-    setTimeout(() => {
-        // Si el usuario no ha tocado (el overlay sigue visible), lo forzamos a cerrar
-        if (!overlay.classList.contains('hidden-overlay')) {
-            hideOverlay(); 
-            console.warn("Cierre forzado del overlay por temporizador.");
-        }
-    }, 5000); // 5000 milisegundos = 5 segundos
     
-    // Asignar listeners a la función de manejo
-    overlay.addEventListener('click', handleOverlayInteraction);
-    overlay.addEventListener('touchstart', handleOverlayInteraction); 
+    // 2. Intentar reproducir el audio (Se usa directamente el play() aquí)
+    if (!musicStarted && audio) { 
+        musicStarted = true;
+        audio.volume = 0.5;
+        
+        const playPromise = audio.play();
+
+        if (playPromise !== undefined) {
+            playPromise.then(_ => {
+                // Éxito en la reproducción
+                if (musicIcon) musicIcon.textContent = '⏸️'; 
+            }).catch(error => {
+                // Falla en la reproducción (navegador bloqueado)
+                console.warn("Autoplay bloqueado. El usuario debe usar el control manual. Error:", error);
+                musicStarted = false; // Permite un reintento manual
+                if (musicIcon) musicIcon.textContent = '▶️'; 
+            });
+        }
+    }
 }
 
-// Control manual (Play/Pause)
+
+// A. Lógica del Overlay
+if (overlay) {
+    // 1. Asignar listener de click y touchstart a la función simplificada
+    overlay.addEventListener('click', handleOverlayClick);
+    overlay.addEventListener('touchstart', handleOverlayClick); 
+    
+    // 2. Temporizador de Cierre Forzado (Plan B: 5 segundos)
+    setTimeout(() => {
+        if (!overlay.classList.contains('hidden-overlay')) {
+            overlay.classList.add('hidden-overlay');
+            console.warn("Cierre forzado del overlay por temporizador.");
+            
+            // Si se cierra por timer, removemos los listeners
+            overlay.removeEventListener('click', handleOverlayClick);
+            overlay.removeEventListener('touchstart', handleOverlayClick);
+        }
+    }, 5000); 
+}
+
+
+// B. Control manual (Play/Pause en la barra de navegación) - Confirmado que funciona
 if (musicControl && audio) {
     musicControl.addEventListener('click', () => {
         if (audio.paused) {
             audio.play().then(() => {
-                musicStarted = true; 
                 musicIcon.textContent = '⏸️'; 
+                musicStarted = true; // Actualiza el estado
             }).catch(error => {
                 console.error("Fallo en el control manual de audio:", error);
+                musicIcon.textContent = '▶️'; 
             });
         } else {
             audio.pause();
@@ -79,7 +80,7 @@ if (musicControl && audio) {
 
 
 // =========================================================
-// 2. SCROLL REVEAL Y MENÚ HAMBURGUESA
+// 2. SCROLL REVEAL Y MENÚ HAMBURGUESA (Sin cambios)
 // =========================================================
 const menuToggle = document.getElementById('menu-toggle');
 const navLinksContainer = document.getElementById('nav-links-container');
@@ -121,7 +122,7 @@ window.addEventListener('scroll', checkReveal);
 
 
 // =========================================================
-// 3. EFECTO MAQUINA DE ESCRIBIR (Typewriter)
+// 3. EFECTO MAQUINA DE ESCRIBIR (Typewriter) (Sin cambios)
 // =========================================================
 const quoteElement = document.querySelector('.type-effect');
 
