@@ -35,10 +35,23 @@ body {
 /* --- FIX PARA WIDGET DE CUENTA REGRESIVA (RESPONSIVO) --- */
 .countdown-timer {
     width: 100% !important; /* Fuerza el ancho del contenedor */
-    max-width: 900px; /* Permite un tamaño grande en desktop si se necesita */
-    display: block; /* Asegura que tome el ancho */
-    text-decoration: none !important; /* Elimina el subrayado */
-    margin: 0 auto; /* Centra el bloque */
+    max-width: 900px; 
+    display: block; 
+    text-decoration: none !important; 
+    margin: 0 auto; 
+    overflow: hidden; /* Evita desbordes */
+}
+
+/* FIX CRÍTICO: Asegura que el iframe (donde se dibuja el widget) no se vea afectado por estilos globales */
+#countdown-wrapper iframe {
+    all: initial; /* Resetea la mayoría de los estilos CSS que podrían interferir */
+    width: 100% !important;
+    max-width: 100% !important;
+    display: block; 
+    margin: 0 auto; 
+    border: none;
+    box-shadow: none;
+    height: 120px; /* Altura estándar, puedes ajustarla si el widget es más alto o más bajo */
 }
 
 /* --- TIPOGRAFÍA Y JERARQUÍA --- */
