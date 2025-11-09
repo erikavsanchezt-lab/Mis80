@@ -1,10 +1,56 @@
-// ... todo el código anterior de música y menú se mantiene ...
+// =========================================================
+// 1. MÚSICA DE FONDO (INICIAR CON CLICK/TAP EN OVERLAY)
+// =========================================================
+const audio = document.getElementById('background-music');
+const musicControl = document.getElementById('music-control');
+const musicIcon = document.getElementById('music-icon');
+const overlay = document.getElementById('welcome-overlay'); 
+
+let musicStarted = false;
+
+function startMusicAndHideOverlay() {
+    if (musicStarted) return; 
+
+    audio.volume = 0.5; 
+    audio.play()
+        .then(() => {
+            overlay.classList.add('hidden-overlay');
+            musicStarted = true;
+            if (musicIcon) musicIcon.textContent = '⏸️'; 
+        })
+        .catch(error => {
+            overlay.classList.add('hidden-overlay');
+            musicStarted = true;
+            console.error("Música bloqueada. Usar el control manual si es visible.", error);
+        });
+
+    overlay.removeEventListener('click', startMusicAndHideOverlay);
+}
+
+if (overlay) {
+    overlay.addEventListener('click', startMusicAndHideOverlay);
+}
+
+// Control manual (Play/Pause)
+if (musicControl) {
+    musicControl.addEventListener('click', () => {
+        if (audio.paused) {
+            audio.play();
+            musicStarted = true; 
+            musicIcon.textContent = '⏸️'; 
+        } else {
+            audio.pause();
+            musicIcon.textContent = '▶️'; 
+        }
+    });
+}
+
 
 // =========================================================
-// 2. CUENTA REGRESIVA (FIX: Fecha y Lógica)
+// 2. CUENTA REGRESIVA (FIX: Fecha y Lógica de Flips)
 // =========================================================
-// ¡IMPORTANTE! La fecha debe incluir el año: "Dec 6, 2025"
-const eventDate = new Date("Dec 6, 2025 18:00:00").getTime(); // Sábado 6 de diciembre de 2025 (18:00)
+// FECHA DEL EVENTO CORREGIDA A DICIEMBRE 6 DE 2025
+const eventDate = new Date("Dec 6, 2025 18:00:00").getTime(); 
 
 const countdownUnits = {
     days: document.getElementById('days'),
@@ -42,7 +88,7 @@ function updateCountdown() {
             element.textContent = paddedNewValue;
             
             element.classList.remove('active'); 
-            void element.offsetWidth; // Forzar reflow
+            void element.offsetWidth; // Forzar reflow para animación
             element.classList.add('active'); 
 
             setTimeout(() => {
@@ -60,4 +106,74 @@ function updateCountdown() {
 updateCountdown();
 const countdownInterval = setInterval(updateCountdown, 1000);
 
-// ... el resto del código (Menú Hamburguesa, Scroll Reveal, Typewriter) se mantiene ...
+
+// =========================================================
+// 3. MENÚ HAMBURGUESA Y SCROLL REVEAL
+// =========================================================
+const menuToggle = document.getElementById('menu-toggle');
+const navLinksContainer = document.getElementById('nav-links-container');
+const navLinks = document.querySelectorAll('.nav-link');
+
+if(menuToggle && navLinksContainer) {
+    menuToggle.addEventListener('click', () => {
+        menuToggle.classList.toggle('active');
+        navLinksContainer.classList.toggle('active'); 
+    });
+
+    navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            if (window.innerWidth <= 768) { 
+                navLinksContainer.classList.remove('active');
+                menuToggle.classList.remove('active');
+            }
+        });
+    });
+}
+
+// SCROLL REVEAL (Animaciones de aparición)
+function checkReveal() {
+    const revealItems = document.querySelectorAll('.reveal-item'); 
+    const windowHeight = window.innerHeight;
+
+    revealItems.forEach(item => {
+        const itemTop = item.getBoundingClientRect().top;
+        const revealPoint = 150; 
+
+        if (itemTop < windowHeight - revealPoint) {
+            item.classList.add('active');
+        } 
+    });
+}
+
+window.addEventListener('load', checkReveal);
+window.addEventListener('scroll', checkReveal);
+
+
+// =========================================================
+// 4. EFECTO MAQUINA DE ESCRIBIR (Typewriter)
+// =========================================================
+const quoteElement = document.querySelector('.type-effect');
+
+if (quoteElement) {
+    const quoteText = quoteElement.textContent;
+    quoteElement.textContent = ''; 
+
+    function typeWriterEffect() {
+        let i = 0;
+        function type() {
+            if (i < quoteText.length) {
+                quoteElement.textContent += quoteText.charAt(i);
+                i++;
+                setTimeout(type, 50); 
+            }
+        }
+        setTimeout(type, 2500);
+    }
+    
+    // Iniciar el efecto después de que el overlay desaparezca o con un retraso inicial
+    setTimeout(() => {
+        if (!overlay || overlay.classList.contains('hidden-overlay')) {
+            typeWriterEffect();
+        }
+    }, 3000); 
+}
