@@ -34,15 +34,15 @@ body {
 
 /* --- FIX PARA WIDGET DE CUENTA REGRESIVA (RESPONSIVO) --- */
 .countdown-timer {
-    width: 100% !important; /* Fuerza el ancho del contenedor */
+    width: 100% !important; 
     max-width: 900px; 
     display: block; 
     text-decoration: none !important; 
     margin: 0 auto; 
-    overflow: hidden; /* Evita desbordes */
+    overflow: hidden; 
 }
 
-/* FIX CRÍTICO: Asegura que el iframe (donde se dibuja el widget) no se vea afectado por estilos globales */
+/* FIX CRÍTICO: Asegura que el iframe (donde se dibuja el widget) no se vea afectado */
 #countdown-wrapper iframe {
     all: initial; /* Resetea la mayoría de los estilos CSS que podrían interferir */
     width: 100% !important;
@@ -51,10 +51,11 @@ body {
     margin: 0 auto; 
     border: none;
     box-shadow: none;
-    height: 120px; /* Altura estándar, puedes ajustarla si el widget es más alto o más bajo */
+    height: 140px; /* Aumentamos ligeramente la altura para evitar el corte vertical */
+    min-height: 100px; /* Asegura una altura mínima */
 }
 
-/* --- TIPOGRAFÍA Y JERARQUÍA --- */
+/* --- TIPOGRAFÍA Y JERARQUÍA --- (sin cambios) */
 h1, h2 { font-weight: 700; line-height: 1.1; }
 .main-title {
     font-size: 3em; 
@@ -68,7 +69,7 @@ h1, h2 { font-weight: 700; line-height: 1.1; }
     margin-bottom: 2em;
 }
 
-/* --- MENSAJES Y CAJAS MODERNAS --- */
+/* --- MENSAJES Y CAJAS MODERNAS --- (sin cambios) */
 .message-box {
     background-color: var(--color-light-bg);
     padding: 60px 5%; 
@@ -93,7 +94,7 @@ h1, h2 { font-weight: 700; line-height: 1.1; }
     margin: 20px auto;
 }
 
-/* --- NAV BAR (Fixed & Responsive) --- */
+/* --- NAV BAR (Fixed & Responsive) --- (sin cambios) */
 .navbar {
     position: sticky; top: 0; z-index: 1000;
     background-color: rgba(245, 245, 220, 0.95); 
@@ -128,7 +129,7 @@ h1, h2 { font-weight: 700; line-height: 1.1; }
     cursor: pointer; transition: color 0.3s; z-index: 1001;
 }
 
-/* --- OVERLAY DE MÚSICA --- */
+/* --- OVERLAY DE MÚSICA --- (sin cambios) */
 #welcome-overlay {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
     background-color: var(--color-fondo); 
@@ -153,7 +154,7 @@ h1, h2 { font-weight: 700; line-height: 1.1; }
 }
 
 
-/* --- SECCIÓN BIENVENIDA --- */
+/* --- SECCIÓN BIENVENIDA --- (sin cambios) */
 .photo-container {
     width: 380px; height: 380px; margin: 40px auto 0; 
 }
@@ -162,7 +163,7 @@ h1, h2 { font-weight: 700; line-height: 1.1; }
 }
 
 
-/* --- SECCIÓN DETALLES (Calendario, Ubicación, Botones) --- */
+/* --- SECCIÓN DETALLES --- (sin cambios) */
 .details-box h2 { font-size: 2.5em; color: var(--color-acento1); margin-bottom: 20px; }
 
 .location-name {
@@ -175,20 +176,19 @@ h1, h2 { font-weight: 700; line-height: 1.1; }
 .date-calendar { 
     border: none; padding: 0; margin: 40px auto; box-shadow: none; 
     background-color: transparent; max-width: 400px;
-    /* CENTRADO FLEX */
     display: flex; flex-direction: column; align-items: center;
 }
 
 .day-wrapper {
     display: flex; 
-    align-items: center; /* Alineación vertical */
-    gap: 20px; /* Espacio entre Sábado y 6 */
+    align-items: center; 
+    gap: 20px; 
 }
 
 .day-name { 
     font-size: 1.8em; 
     color: var(--color-acento1);
-    font-weight: 400; /* Ligeramente más delgado */
+    font-weight: 400; 
 }
 
 .day-number {
@@ -207,27 +207,36 @@ h1, h2 { font-weight: 700; line-height: 1.1; }
     font-size: 1.5em; 
     color: var(--color-acento2); 
     font-weight: 400; 
-    margin-top: 15px; /* Espacio entre la fecha y el mes/año */
+    margin-top: 15px; 
 }
 
 
-/* BOTONES DE ACCIÓN (Modernos, tipo píldora) */
+/* BOTONES DE ACCIÓN (Corregido para asegurar los estilos) */
 .button-group {
     margin-top: 40px; gap: 20px; display: flex; justify-content: center; flex-wrap: wrap;
 }
 .btn {
-    text-decoration: none !important; padding: 12px 30px; border-radius: 30px; 
-    font-weight: bold; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-    text-transform: uppercase; letter-spacing: 1px;
-    display: inline-flex; align-items: center; justify-content: center;
+    /* Reinicia estilos de anclaje que puedan venir del navegador (ej: color púrpura) */
+    color: white !important; /* Forzar color blanco del texto del botón */
+    text-decoration: none !important; 
+    
+    padding: 12px 30px; 
+    border-radius: 30px; 
+    font-weight: bold; 
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    text-transform: uppercase; 
+    letter-spacing: 1px;
+    display: inline-flex; 
+    align-items: center; 
+    justify-content: center;
     transition: transform 0.3s, box-shadow 0.3s;
 }
-.btn-maps { background-color: var(--color-acento2); color: white; }
-.btn-confirm { background-color: var(--color-acento1); color: white; }
+.btn-maps { background-color: var(--color-acento2); } /* Verde Salvia */
+.btn-confirm { background-color: var(--color-acento1); } /* Rosado/Maroon */
 .btn:hover { transform: translateY(-2px) scale(1.02); box-shadow: 0 8px 15px rgba(0, 0, 0, 0.25); }
 
 
-/* --- SCROLL REVEAL --- */
+/* --- SCROLL REVEAL --- (sin cambios) */
 .reveal-item { opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
 .reveal-item.active { opacity: 1; transform: translateY(0); }
 
