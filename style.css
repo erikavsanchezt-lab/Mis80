@@ -34,13 +34,14 @@ body {
 
 /* --- FIX PARA WIDGET DE CUENTA REGRESIVA (FINAL) --- */
 
-/* Contenedor padre de Logwork, permitimos que el contenido se vea */
+/* Contenedor padre de Logwork, aseguramos un alto mínimo */
 #countdown-wrapper {
     margin: 20px auto 40px; 
     text-align: center;
-    overflow: visible !important; /* Permitir desbordamiento */
+    overflow: visible !important; 
     padding: 0;
-    line-height: normal; 
+    line-height: normal;
+    min-height: 150px; /* Alto mínimo para que el widget se renderice */
 }
 
 /* La etiqueta <a> que contiene el widget */
@@ -50,7 +51,7 @@ body {
     display: block; 
     text-decoration: none !important; 
     margin: 0 auto; 
-    overflow: visible !important; /* Permitir desbordamiento */
+    overflow: visible !important; 
 }
 
 /* FIX CRÍTICO: El iframe (donde se dibuja el contador) */
@@ -144,12 +145,26 @@ h1, h2 { font-weight: 700; line-height: 1.1; }
     cursor: pointer; transition: color 0.3s; z-index: 1001;
 }
 
-/* --- OVERLAY DE MÚSICA --- (sin cambios) */
+/* --- OVERLAY DE MÚSICA (CRÍTICO: AHORA ES UN BOTÓN) --- */
 #welcome-overlay {
-    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%;
     background-color: var(--color-fondo); 
-    display: flex; flex-direction: column; justify-content: center; align-items: center;
-    z-index: 9999; cursor: pointer; transition: opacity 0.8s ease-out, visibility 0.8s; 
+    display: flex; 
+    flex-direction: column; 
+    justify-content: center; 
+    align-items: center;
+    z-index: 9999; 
+    cursor: pointer; 
+    transition: opacity 0.8s ease-out, visibility 0.8s; 
+    
+    /* Propiedades añadidas para que el botón cubra toda la pantalla sin estilos de botón por defecto */
+    border: none;
+    padding: 0;
+    margin: 0;
 }
 .hidden-overlay {
     opacity: 0 !important;
