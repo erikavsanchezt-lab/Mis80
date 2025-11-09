@@ -1,8 +1,11 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flor María — 80 años</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <title>Nuestros 80's</title>
 </head>
 <body>
 
@@ -10,41 +13,90 @@
         <p>Toca o haz click para entrar y activar la música 🎶</p>
     </div>
 
-    <header>
-        <button id="menu-toggle" aria-label="Abrir menú">
+    <audio id="background-music" loop>
+        <source src="https://files.catbox.moe/yogpbx.mp3" type="audio/mp3">
+        Tu navegador no soporta el elemento de audio.
+    </audio>
+
+    <nav class="navbar">
+        <button id="menu-toggle" class="menu-toggle" aria-label="Abrir menú">
             <span class="bar"></span>
             <span class="bar"></span>
             <span class="bar"></span>
         </button>
+        
+        <div id="nav-links-container" class="nav-links-container">
+            <a href="#bienvenida" class="nav-link">Bienvenida</a>
+            <a href="#mensaje1" class="nav-link">Mensaje</a>
+            <a href="#detalles" class="nav-link">Detalles</a>
+            <a href="#cierre" class="nav-link">Cierre</a>
+        </div>
 
-        <nav id="navbar" class="hidden-nav">
-            <ul>
-                <li><a href="#inicio">Inicio</a></li>
-                <li><a href="#historia">Nuestra Historia</a></li>
-                <li><a href="#countdown-section">Cuando</a></li>
-                <li><a href="#cierre">Te Esperamos</a></li>
-                <li><a href="#musica">Música</a></li>
-            </ul>
-        </nav>
-        </header>
+        <div id="music-control" class="music-control" title="Reproducir música de fondo">
+            <span id="music-icon">▶️</span>
+        </div>
+    </nav>
 
     <main>
-        <section id="historia" class="reveal">
-            </section>
-
-        <section id="countdown-section" class="reveal">
-            <h2>Falta...</h2>
-            <div id="countdown-timer">
-                <span id="days">0</span> días
-                <span id="hours">0</span> horas
-                <span id="minutes">0</span> minutos
-                <span id="seconds">0</span> segundos
+        <section id="bienvenida" class="section reveal-item">
+            <h1 class="main-title">¡Te invitamos a Celebrar la vida de esta extraordinaria mujer!</h1>
+            <p class="subtitle">Que nos ha brindado <strong>AMOR, SABIDURÍA y LUZ</strong></p>
+            
+            <div class="photo-container">
+                <img src="https://raw.githubusercontent.com/erikavsanchezt-lab/Mis80/main/img/Marco.png" alt="Marco botánico dorado" class="botanic-frame">
+                <img src="https://raw.githubusercontent.com/erikavsanchezt-lab/Mis80/main/img/Abuelita.jpg" alt="Flor María 80 años" class="profile-photo">
             </div>
         </section>
-        
-        <audio id="background-music" src="https://raw.githubusercontent.com/erikavsanchezt-lab/Mis80/main/audio/musica.mp3" loop></audio>
 
+        <section id="mensaje1" class="section message-box reveal-item">
+            <p class="botanic-separator">***</p>
+            <p class="message-text">
+                Son 80 años llenos de amor, enseñanzas, fortaleza y momentos inolvidables.<br>
+                Dios nos ha bendecido con una madre y abuela maravillosa, y este día queremos honrar su historia, su dulzura y el inmenso amor que ha sembrado en cada corazón que ha tocado.<br>
+                ¡Acompáñanos a celebrar esta hermosa bendición que la vida nos regala!
+            </p>
+            <p class="botanic-separator">***</p>
+        </section>
+
+        <section id="detalles" class="section details-box reveal-item">
+            <h2>Detalles del Evento</h2>
+            
+            <div class="date-calendar">
+                <div class="month">Diciembre 2025</div>
+                <div class="day-wrapper">
+                    <span class="day-number">6</span>
+                    <span class="day-name">Sábado</span>
+                </div>
+            </div>
+
+            <h3>Falta para el Gran Día:</h3>
+            <div id="countdown" class="countdown-timer">
+                <div class="countdown-unit"><span id="days" class="flip-number">00</span> Días</div>
+                <div class="countdown-unit"><span id="hours" class="flip-number">00</span> Horas</div>
+                <div class="countdown-unit"><span id="minutes" class="flip-number">00</span> Minutos</div>
+                <div class="countdown-unit"><span id="seconds" class="flip-number">00</span> Segundos</div>
+            </div>
+
+            <h3 class="location-name">Finca San Miguel</h3>
+            <div class="button-group">
+                <a href="https://www.google.com/maps/place/Finca+San+Miguel/@5.0679203,-75.6838147,17z/data=!3m1!4b1!4m6!3m5!1s0x8e47799c77fb84e5:0x8d07f8d132cbb4e5!8m2!3d5.0679203!4d-75.6812398!16s%2Fg%2F11yjsj3cgn?entry=ttu&g_ep=EgoyMDI1MTEwNS4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="btn btn-maps">Cómo llegar</a>
+                <a href="https://api.whatsapp.com/send/?phone=573117266064&text=Hola%2C+confirmo+mi+asistencia+a+los+80+a%C3%B1os+de+Flor+Mar%C3%ADa&type=phone_number&app_absent=0" target="_blank" class="btn btn-confirm">Confirmar asistencia</a>
+            </div>
+        </section>
+
+        <section id="cierre" class="section message-box closure-box reveal-item">
+            <p class="botanic-separator-bold">⚜️</p>
+            <p class="quote-text type-effect">
+                “Los años no se cuentan, se celebran. Los momentos no se guardan, se atesoran. ¡Y la vida no solo se vive, sino que se agradece!”
+            </p>
+            <p class="message-text">
+                Madre, abuela y amiga. Gracias por ser nuestro ejemplo, nuestro abrazo seguro y nuestra mayor inspiración.
+            </p>
+            <p class="botanic-separator-bold">⚜️</p>
+        </section>
+        
     </main>
+    
     <script src="script.js"></script>
 </body>
 </html>
