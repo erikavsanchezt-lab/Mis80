@@ -41,7 +41,7 @@ body {
     overflow: visible !important; 
     padding: 0;
     line-height: normal;
-    min-height: 150px; /* Alto mínimo para que el widget se renderice */
+    min-height: 200px; /* Alto mínimo para que el widget se renderice */
 }
 
 /* La etiqueta <a> que contiene el widget */
@@ -63,8 +63,9 @@ body {
     border: none;
     box-shadow: none;
     
-    height: 200px !important; /* Altura máxima y generosa forzada */
-    overflow: visible !important; /* Lo más importante aquí para evitar el corte! */
+    /* CAMBIO SOLICITADO */
+    height: 200px !important; 
+    overflow: visible !important; 
     
     padding: 0 !important;
     box-sizing: content-box !important;
@@ -145,7 +146,7 @@ h1, h2 { font-weight: 700; line-height: 1.1; }
     cursor: pointer; transition: color 0.3s; z-index: 1001;
 }
 
-/* --- OVERLAY DE MÚSICA (CRÍTICO: AHORA ES UN BOTÓN) --- */
+/* --- OVERLAY DE MÚSICA (Los estilos se mantienen, pero el elemento está comentado en HTML) --- */
 #welcome-overlay {
     position: fixed; 
     top: 0; 
