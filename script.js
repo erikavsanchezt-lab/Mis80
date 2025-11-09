@@ -1,5 +1,5 @@
 // =========================================================
-// 1. MÚSICA DE FONDO (INICIAR CON CLICK/TAP EN OVERLAY)
+// 1. MÚSICA DE FONDO (INICIAR CON CLICK/TAP EN OVERLAY) - FIX
 // =========================================================
 const audio = document.getElementById('background-music');
 const musicControl = document.getElementById('music-control');
@@ -20,17 +20,14 @@ function startMusicAndHideOverlay() {
             if (musicIcon) musicIcon.textContent = '⏸️'; 
         })
         .catch(error => {
-            // Si falla (navegador muy estricto), aún ocultamos el overlay
             overlay.classList.add('hidden-overlay');
             musicStarted = true;
-            console.error("Música bloqueada. Use el control manual.", error);
+            console.error("Música bloqueada. Usar el control manual si es visible.", error);
         });
 
-    // Remover el listener inmediatamente después de la primera interacción
     overlay.removeEventListener('click', startMusicAndHideOverlay);
 }
 
-// Inicializar el listener del overlay
 if (overlay) {
     overlay.addEventListener('click', startMusicAndHideOverlay);
 }
@@ -40,7 +37,7 @@ if (musicControl) {
     musicControl.addEventListener('click', () => {
         if (audio.paused) {
             audio.play();
-            musicStarted = true;
+            musicStarted = true; // Si se inicia manualmente, actualizamos el estado
             musicIcon.textContent = '⏸️'; 
         } else {
             audio.pause();
@@ -51,7 +48,7 @@ if (musicControl) {
 
 
 // =========================================================
-// 2. CUENTA REGRESIVA (FIX: IDs de elementos)
+// 2. CUENTA REGRESIVA (FIX: IDs correctos)
 // =========================================================
 const eventDate = new Date("Dec 6, 2025 18:00:00").getTime(); // Sábado 6 de diciembre de 2025 (18:00)
 
@@ -68,7 +65,8 @@ function updateCountdown() {
 
     if (distance < 0) {
         clearInterval(countdownInterval);
-        document.getElementById("countdown").innerHTML = "<h2>¡CELEBRANDO!</h2>";
+        const countdownElement = document.getElementById("countdown");
+        if(countdownElement) countdownElement.innerHTML = "<h2>¡CELEBRANDO!</h2>";
         return;
     }
 
@@ -79,9 +77,7 @@ function updateCountdown() {
 
     const pad = num => num < 10 ? '0' + num : num.toString();
 
-    // Función para actualizar, guardar el valor anterior, y aplicar el 'flip'
     function updateAndFlip(element, newValue) {
-        // Asegurarse de que el elemento exista antes de intentar manipularlo
         if (!element) return; 
         
         const currentValue = element.textContent;
@@ -92,7 +88,7 @@ function updateCountdown() {
             element.textContent = paddedNewValue;
             
             element.classList.remove('active'); 
-            void element.offsetWidth; 
+            void element.offsetWidth; // Forzar reflow
             element.classList.add('active'); 
 
             setTimeout(() => {
@@ -101,7 +97,6 @@ function updateCountdown() {
         }
     }
 
-    // Llamadas a la función de actualización
     updateAndFlip(countdownUnits.days, days);
     updateAndFlip(countdownUnits.hours, hours);
     updateAndFlip(countdownUnits.minutes, minutes);
@@ -113,31 +108,35 @@ const countdownInterval = setInterval(updateCountdown, 1000);
 
 
 // =========================================================
-// 3. MENÚ HAMBURGUESA (FIX: Lógica de activación)
+// 3. MENÚ HAMBURGUESA (FIX: Lógica y Cierre en Mobile)
 // =========================================================
 const menuToggle = document.getElementById('menu-toggle');
 const navLinksContainer = document.getElementById('nav-links-container');
 const navLinks = document.querySelectorAll('.nav-link');
 
-menuToggle.addEventListener('click', () => {
-    menuToggle.classList.toggle('active');
-    navLinksContainer.classList.toggle('active'); // Usa 'active' para CSS
-});
-
-// Cierra el menú al hacer click en un enlace
-navLinks.forEach(link => {
-    link.addEventListener('click', () => {
-        navLinksContainer.classList.remove('active');
-        menuToggle.classList.remove('active');
+if(menuToggle && navLinksContainer) {
+    menuToggle.addEventListener('click', () => {
+        menuToggle.classList.toggle('active');
+        navLinksContainer.classList.toggle('active'); // Usa 'active' para mostrar/ocultar
     });
-});
+
+    // Cierra el menú al hacer click en un enlace (solo en móvil, ya que el menú desaparece en desktop)
+    navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            if (window.innerWidth <= 768) { // Solo en dispositivos móviles
+                navLinksContainer.classList.remove('active');
+                menuToggle.classList.remove('active');
+            }
+        });
+    });
+}
 
 
 // =========================================================
-// 4. SCROLL REVEAL (ANIMACIONES DE APARICIÓN FIX: Clase 'reveal-item')
+// 4. SCROLL REVEAL (ANIMACIONES DE APARICIÓN FIX)
 // =========================================================
 function checkReveal() {
-    const revealItems = document.querySelectorAll('.reveal-item');
+    const revealItems = document.querySelectorAll('.reveal-item'); // Asegúrate de que los elementos tengan esta clase
     const windowHeight = window.innerHeight;
 
     revealItems.forEach(item => {
@@ -172,8 +171,16 @@ if (quoteElement) {
                 setTimeout(type, 50); 
             }
         }
-        type(); 
+        setTimeout(type, 2500); // Retraso antes de iniciar la escritura
     }
-    // Retraso para que el usuario pueda ver la animación
-    setTimeout(typeWriterEffect, 2500);
+    // Asegurarse de que el efecto solo se inicie después de que el overlay desaparezca
+    // O si no hay overlay, se puede iniciar directamente con un setTimeout
+    // Si usas el overlay, esta llamada debería estar dentro del `then` del audio
+    // Pero para simplificar, lo dejo aquí con un retraso.
+    // Una opción más robusta sería añadir un MutationObserver al overlay.
+    setTimeout(() => {
+        if (!overlay || overlay.classList.contains('hidden-overlay')) {
+            typeWriterEffect();
+        }
+    }, 3000); // Dale tiempo al overlay para desaparecer
 }
