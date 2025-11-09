@@ -10,34 +10,33 @@ let musicStarted = false;
 
 // Función para iniciar la música y ocultar el overlay
 function startMusicAndHideOverlay() {
-    // Solo se ejecuta la primera vez
+    // 1. Solo se ejecuta la primera vez
     if (musicStarted) return; 
 
-    audio.volume = 0.5; 
+    // 2. FUERZA LA DESAPARICIÓN DEL OVERLAY INMEDIATAMENTE
+    if (overlay) {
+        overlay.classList.add('hidden-overlay');
+        musicStarted = true; // Consideramos que el "inicio" ha ocurrido
+    }
     
-    // Intentar reproducir y manejar la promesa de reproducción (necesario por las políticas del navegador)
+    // 3. Remover el listener para que el clic solo sea efectivo una vez en el overlay
+    overlay.removeEventListener('click', startMusicAndHideOverlay);
+    overlay.removeEventListener('touchstart', startMusicAndHideOverlay);
+
+    // 4. Intentar reproducir el audio
+    audio.volume = 0.5; 
     const playPromise = audio.play();
 
     if (playPromise !== undefined) {
         playPromise.then(_ => {
-            // La reproducción comenzó correctamente
-            overlay.classList.add('hidden-overlay');
-            musicStarted = true;
+            // La reproducción comenzó correctamente, actualiza el icono a pausa
             if (musicIcon) musicIcon.textContent = '⏸️'; 
         }).catch(error => {
-            // La reproducción fue bloqueada 
-            console.warn("La reproducción de audio fue bloqueada. El overlay se oculta, usar control manual.", error);
-            
-            // Ocultar el overlay de todas formas, para no frustrar al usuario
-            overlay.classList.add('hidden-overlay');
-            musicStarted = true;
+            // La reproducción fue bloqueada o falló, usa el control manual
+            console.warn("La reproducción de audio fue bloqueada. Usar control manual.", error);
             if (musicIcon) musicIcon.textContent = '▶️'; 
         });
     }
-
-    // Remover el listener para que el clic solo sea efectivo una vez en el overlay
-    overlay.removeEventListener('click', startMusicAndHideOverlay);
-    overlay.removeEventListener('touchstart', startMusicAndHideOverlay);
 }
 
 if (overlay) {
