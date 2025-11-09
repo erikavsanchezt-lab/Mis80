@@ -62,7 +62,7 @@ body {
     border: none;
     box-shadow: none;
     
-    height: 170px !important; /* Altura máxima y generosa forzada */
+    height: 200px !important; /* Altura máxima y generosa forzada */
     overflow: visible !important; /* Lo más importante aquí para evitar el corte! */
     
     padding: 0 !important;
