@@ -1,5 +1,5 @@
 // =========================================================
-// 1. MÚSICA DE FONDO (INICIAR CON CLICK/TAP EN OVERLAY) - FIX ROBUSTO
+// 1. MÚSICA DE FONDO (INICIAR CON CLICK/TAP EN OVERLAY) - FIX FINAL
 // =========================================================
 const audio = document.getElementById('background-music');
 const musicControl = document.getElementById('music-control');
@@ -10,19 +10,23 @@ let musicStarted = false;
 
 // Función para iniciar la música y ocultar el overlay
 function startMusicAndHideOverlay() {
-    // 1. Solo se ejecuta la primera vez
-    if (musicStarted) return; 
-
-    // 2. FUERZA LA DESAPARICIÓN DEL OVERLAY INMEDIATAMENTE
+    
+    // --- PASO 1: CIERRE INMEDIATO DEL OVERLAY ---
+    // Esto debe ejecutarse primero y sin condiciones para garantizar la UX.
     if (overlay) {
         overlay.classList.add('hidden-overlay');
-        musicStarted = true; // Consideramos que el "inicio" ha ocurrido
     }
     
-    // 3. Remover el listener para que el clic solo sea efectivo una vez en el overlay
-    overlay.removeEventListener('click', startMusicAndHideOverlay);
-    overlay.removeEventListener('touchstart', startMusicAndHideOverlay);
+    // Solo intentar iniciar la música si no se ha intentado antes
+    if (musicStarted) return; 
+    musicStarted = true; 
 
+    // 3. Remover el listener para que el clic solo sea efectivo una vez en el overlay
+    if (overlay) {
+        overlay.removeEventListener('click', startMusicAndHideOverlay);
+        overlay.removeEventListener('touchstart', startMusicAndHideOverlay);
+    }
+    
     // 4. Intentar reproducir el audio
     audio.volume = 0.5; 
     const playPromise = audio.play();
