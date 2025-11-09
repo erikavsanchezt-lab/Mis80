@@ -32,6 +32,16 @@ body {
     margin: 0 auto;
 }
 
+/* --- FIX PARA WIDGET DE CUENTA REGRESIVA --- */
+/* Asegura que el widget tenga espacio y elimina el subrayado si es un enlace */
+.countdown-timer {
+    width: 100% !important; /* Fuerza el ancho del contenedor */
+    max-width: 450px; /* Limita el ancho en pantallas grandes si es necesario */
+    display: block; /* Asegura que tome el ancho */
+    text-decoration: none !important; /* Elimina el subrayado (visto en la captura) */
+    margin: 0 auto; /* Centra el bloque */
+}
+
 /* --- TIPOGRAFÍA Y JERARQUÍA --- */
 h1, h2 { font-weight: 700; line-height: 1.1; }
 .main-title {
