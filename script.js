@@ -1,72 +1,22 @@
 // =========================================================
-// 1. MÚSICA DE FONDO (INICIAR CON CLICK/TAP EN OVERLAY) - FIX FINAL
+// 1. MÚSICA DE FONDO (AJUSTADA: SE INICIA MANUALMENTE)
 // =========================================================
+// Nota: Los elementos 'audio' y 'welcome-overlay' han sido comentados
+// en index.html para evitar el bloqueo del móvil.
+
+// Definimos las variables para evitar errores
 const audio = document.getElementById('background-music');
 const musicControl = document.getElementById('music-control');
 const musicIcon = document.getElementById('music-icon');
-const overlay = document.getElementById('welcome-overlay'); // Ahora es un BUTTON
-
-let musicStarted = false;
-
-// SOLUCIÓN DE EMERGENCIA: Forzar cierre del overlay después de 5 segundos si el clic no funciona.
-if (overlay) {
-    setTimeout(() => {
-        // Solo cierra si el overlay está visible (no tiene la clase hidden-overlay)
-        if (!overlay.classList.contains('hidden-overlay')) {
-            overlay.classList.add('hidden-overlay');
-            console.warn("Cierre forzado del overlay por temporizador.");
-        }
-    }, 5000); // 5000 milisegundos = 5 segundos
-}
-
-// Función para iniciar la música y ocultar el overlay
-function startMusicAndHideOverlay() {
-    
-    // --- PASO 1: CIERRE INMEDIATO DEL OVERLAY ---
-    if (overlay) {
-        overlay.classList.add('hidden-overlay');
-    }
-    
-    // Solo intentar iniciar la música si no se ha intentado antes
-    if (musicStarted) return; 
-    musicStarted = true; 
-
-    // 3. Remover el listener
-    if (overlay) {
-        overlay.removeEventListener('click', startMusicAndHideOverlay);
-        overlay.removeEventListener('touchstart', startMusicAndHideOverlay);
-    }
-    
-    // 4. Intentar reproducir el audio
-    audio.volume = 0.5; 
-    const playPromise = audio.play();
-
-    if (playPromise !== undefined) {
-        playPromise.then(_ => {
-            if (musicIcon) musicIcon.textContent = '⏸️'; 
-        }).catch(error => {
-            // Esto se ejecuta si el navegador bloquea la reproducción automática.
-            console.warn("La reproducción de audio fue bloqueada. Usar control manual.", error);
-            if (musicIcon) musicIcon.textContent = '▶️'; 
-        });
-    }
-}
-
-if (overlay) {
-    // Escuchar el evento click (para escritorio) y touchstart (para móvil)
-    overlay.addEventListener('click', startMusicAndHideOverlay);
-    overlay.addEventListener('touchstart', startMusicAndHideOverlay); 
-}
 
 // Control manual (Play/Pause)
-if (musicControl) {
+if (musicControl && audio) {
     musicControl.addEventListener('click', () => {
         if (audio.paused) {
             audio.play().then(() => {
-                musicStarted = true; 
                 musicIcon.textContent = '⏸️'; 
             }).catch(error => {
-                console.error("Fallo en el control manual:", error);
+                console.error("Fallo en el control manual de audio:", error);
             });
         } else {
             audio.pause();
@@ -139,11 +89,8 @@ if (quoteElement) {
         setTimeout(type, 2500);
     }
     
-    // Iniciar el efecto después de un retraso inicial
+    // Iniciar el efecto después de un pequeño retraso
     setTimeout(() => {
-        // Asegúrate de iniciar el efecto solo si el overlay se ha ido
-        if (!overlay || overlay.classList.contains('hidden-overlay')) {
-            typeWriterEffect();
-        }
-    }, 3000); 
+        typeWriterEffect();
+    }, 1000); 
 }
