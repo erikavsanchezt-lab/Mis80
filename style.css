@@ -38,7 +38,7 @@ body {
 #countdown-wrapper {
     margin: 20px auto 40px; 
     text-align: center;
-    overflow: visible !important; /* Importante: Permitir desbordamiento */
+    overflow: visible !important; /* Permitir desbordamiento */
     padding: 0;
     line-height: normal; 
 }
@@ -50,7 +50,7 @@ body {
     display: block; 
     text-decoration: none !important; 
     margin: 0 auto; 
-    overflow: visible !important; /* Importante: Permitir desbordamiento */
+    overflow: visible !important; /* Permitir desbordamiento */
 }
 
 /* FIX CRÍTICO: El iframe (donde se dibuja el contador) */
@@ -62,8 +62,8 @@ body {
     border: none;
     box-shadow: none;
     
-    height: 150px !important; /* Altura generosa forzada */
-    overflow: visible !important; /* ¡Lo más importante aquí para evitar el corte! */
+    height: 170px !important; /* Altura máxima y generosa forzada */
+    overflow: visible !important; /* Lo más importante aquí para evitar el corte! */
     
     padding: 0 !important;
     box-sizing: content-box !important;
