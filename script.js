@@ -1,5 +1,5 @@
 // =========================================================
-// 1. MÚSICA DE FONDO (INICIAR CON CLICK/TAP EN OVERLAY) - LÓGICA RESTAURADA
+// 1. MÚSICA DE FONDO (INICIAR CON CLICK/TAP EN OVERLAY) - FIX FINAL
 // =========================================================
 const audio = document.getElementById('background-music');
 const musicControl = document.getElementById('music-control');
@@ -8,56 +8,56 @@ const overlay = document.getElementById('welcome-overlay');
 
 let musicStarted = false;
 
-// SOLUCIÓN DE EMERGENCIA: Forzar cierre del overlay después de 5 segundos si el clic no funciona.
+// --- Función 1: Ocultar la máscara de forma inmediata y remover listeners ---
+function hideOverlay() {
+    if (overlay) {
+        overlay.classList.add('hidden-overlay');
+        
+        // Remover listeners para evitar intentos repetidos
+        overlay.removeEventListener('click', handleOverlayInteraction);
+        overlay.removeEventListener('touchstart', handleOverlayInteraction);
+    }
+}
+
+// --- Función 2: Solo intenta reproducir la música ---
+function tryToPlayMusic() {
+    if (musicStarted || !audio) return; 
+    musicStarted = true; 
+
+    audio.volume = 0.5; 
+    const playPromise = audio.play();
+
+    if (playPromise !== undefined) {
+        playPromise.then(_ => {
+            if (musicIcon) musicIcon.textContent = '⏸️'; 
+        }).catch(error => {
+            // El navegador bloqueó el audio. El icono se queda en Play (▶️).
+            console.warn("La reproducción de audio fue bloqueada. Usar control manual.", error);
+            if (musicIcon) musicIcon.textContent = '▶️'; 
+        });
+    }
+}
+
+// --- Función 3: Maneja la interacción (el click/touch) ---
+function handleOverlayInteraction() {
+    // CRÍTICO: Primero escondemos la máscara, luego intentamos el audio
+    hideOverlay();
+    tryToPlayMusic();
+}
+
+// SOLUCIÓN DE EMERGENCIA: Forzar cierre del overlay después de 5 segundos
 if (overlay) {
     setTimeout(() => {
-        // Solo cierra si el overlay está visible (no tiene la clase hidden-overlay)
+        // Si el usuario no ha tocado (el overlay sigue visible), lo forzamos a cerrar
         if (!overlay.classList.contains('hidden-overlay')) {
-            overlay.classList.add('hidden-overlay');
+            hideOverlay(); 
             console.warn("Cierre forzado del overlay por temporizador.");
         }
     }, 5000); // 5000 milisegundos = 5 segundos
-}
-
-// Función para iniciar la música y ocultar el overlay
-function startMusicAndHideOverlay() {
     
-    // --- PASO 1: CIERRE INMEDIATO DEL OVERLAY ---
-    if (overlay) {
-        overlay.classList.add('hidden-overlay');
-    }
-    
-    // Solo intentar iniciar la música si no se ha intentado antes
-    if (musicStarted) return; 
-    musicStarted = true; 
-
-    // 3. Remover el listener para evitar múltiples reproducciones
-    if (overlay) {
-        overlay.removeEventListener('click', startMusicAndHideOverlay);
-        overlay.removeEventListener('touchstart', startMusicAndHideOverlay);
-    }
-    
-    // 4. Intentar reproducir el audio
-    if (audio) {
-        audio.volume = 0.5; 
-        const playPromise = audio.play();
-
-        if (playPromise !== undefined) {
-            playPromise.then(_ => {
-                if (musicIcon) musicIcon.textContent = '⏸️'; 
-            }).catch(error => {
-                // Si el navegador bloquea la reproducción automática, se deja el ícono de Play
-                console.warn("La reproducción de audio fue bloqueada. Usar control manual.", error);
-                if (musicIcon) musicIcon.textContent = '▶️'; 
-            });
-        }
-    }
-}
-
-if (overlay) {
-    // Escuchar el evento click (para escritorio) y touchstart (para móvil)
-    overlay.addEventListener('click', startMusicAndHideOverlay);
-    overlay.addEventListener('touchstart', startMusicAndHideOverlay); 
+    // Asignar listeners a la función de manejo
+    overlay.addEventListener('click', handleOverlayInteraction);
+    overlay.addEventListener('touchstart', handleOverlayInteraction); 
 }
 
 // Control manual (Play/Pause)
@@ -141,9 +141,11 @@ if (quoteElement) {
         setTimeout(type, 2500);
     }
     
-    // Iniciar el efecto después de un pequeño retraso y asegurando que el overlay no esté
+    // Iniciar el efecto después de un pequeño retraso
     setTimeout(() => {
-        if (!overlay || overlay.classList.contains('hidden-overlay')) {
+        const overlayElement = document.getElementById('welcome-overlay');
+        // Solo iniciar si el overlay está cerrado
+        if (!overlayElement || overlayElement.classList.contains('hidden-overlay')) {
             typeWriterEffect();
         }
     }, 3000); 
