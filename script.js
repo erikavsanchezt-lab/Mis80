@@ -64,7 +64,7 @@ if (musicControl) {
 
 
 // =========================================================
-// 2. CUENTA REGRESIVA - Lógica eliminada, ahora se usa IFRAME
+// 2. CUENTA REGRESIVA - Lógica eliminada, se usa Widget
 // =========================================================
 
 
