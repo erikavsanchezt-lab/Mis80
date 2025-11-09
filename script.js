@@ -8,6 +8,17 @@ const overlay = document.getElementById('welcome-overlay');
 
 let musicStarted = false;
 
+// SOLUCIÓN DE EMERGENCIA: Forzar cierre del overlay después de 5 segundos si el clic no funciona.
+if (overlay) {
+    setTimeout(() => {
+        // Solo cierra si el overlay está visible (no tiene la clase hidden-overlay)
+        if (!overlay.classList.contains('hidden-overlay')) {
+            overlay.classList.add('hidden-overlay');
+            console.warn("Cierre forzado del overlay por temporizador.");
+        }
+    }, 5000); // 5000 milisegundos = 5 segundos
+}
+
 // Función para iniciar la música y ocultar el overlay
 function startMusicAndHideOverlay() {
     
@@ -135,6 +146,7 @@ if (quoteElement) {
     
     // Iniciar el efecto después de un retraso inicial
     setTimeout(() => {
+        // Asegúrate de iniciar el efecto solo si el overlay se ha ido
         if (!overlay || overlay.classList.contains('hidden-overlay')) {
             typeWriterEffect();
         }
