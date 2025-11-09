@@ -4,7 +4,7 @@
 const audio = document.getElementById('background-music');
 const musicControl = document.getElementById('music-control');
 const musicIcon = document.getElementById('music-icon');
-const overlay = document.getElementById('welcome-overlay'); 
+const overlay = document.getElementById('welcome-overlay'); // Ahora es un BUTTON
 
 let musicStarted = false;
 
@@ -31,7 +31,7 @@ function startMusicAndHideOverlay() {
     if (musicStarted) return; 
     musicStarted = true; 
 
-    // 3. Remover el listener para que el clic solo sea efectivo una vez en el overlay
+    // 3. Remover el listener
     if (overlay) {
         overlay.removeEventListener('click', startMusicAndHideOverlay);
         overlay.removeEventListener('touchstart', startMusicAndHideOverlay);
@@ -43,10 +43,9 @@ function startMusicAndHideOverlay() {
 
     if (playPromise !== undefined) {
         playPromise.then(_ => {
-            // La reproducción comenzó correctamente, actualiza el icono a pausa
             if (musicIcon) musicIcon.textContent = '⏸️'; 
         }).catch(error => {
-            // La reproducción fue bloqueada o falló, usa el control manual
+            // Esto se ejecuta si el navegador bloquea la reproducción automática.
             console.warn("La reproducción de audio fue bloqueada. Usar control manual.", error);
             if (musicIcon) musicIcon.textContent = '▶️'; 
         });
@@ -54,6 +53,7 @@ function startMusicAndHideOverlay() {
 }
 
 if (overlay) {
+    // Escuchar el evento click (para escritorio) y touchstart (para móvil)
     overlay.addEventListener('click', startMusicAndHideOverlay);
     overlay.addEventListener('touchstart', startMusicAndHideOverlay); 
 }
@@ -77,12 +77,7 @@ if (musicControl) {
 
 
 // =========================================================
-// 2. CUENTA REGRESIVA - Lógica eliminada, se usa Widget
-// =========================================================
-
-
-// =========================================================
-// 3. MENÚ HAMBURGUESA Y SCROLL REVEAL
+// 2. SCROLL REVEAL Y MENÚ HAMBURGUESA
 // =========================================================
 const menuToggle = document.getElementById('menu-toggle');
 const navLinksContainer = document.getElementById('nav-links-container');
@@ -124,7 +119,7 @@ window.addEventListener('scroll', checkReveal);
 
 
 // =========================================================
-// 4. EFECTO MAQUINA DE ESCRIBIR (Typewriter)
+// 3. EFECTO MAQUINA DE ESCRIBIR (Typewriter)
 // =========================================================
 const quoteElement = document.querySelector('.type-effect');
 
