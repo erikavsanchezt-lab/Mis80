@@ -150,17 +150,44 @@ h1, h2 { font-weight: 700; line-height: 1.1; }
 .location-name::before { content: '📍'; margin-right: 10px; font-size: 1.2em; vertical-align: middle; }
 
 /* REDISEÑO DEL CALENDARIO (Foco visual y moderno) */
-.date-calendar { border: none; padding: 0; margin: 40px auto; box-shadow: none; background-color: transparent; max-width: 400px; }
-.month { font-size: 1.5em; color: var(--color-acento2); font-weight: 400; margin-bottom: 15px; }
-.day-number {
-    font-size: 5em; font-weight: 700; color: white;
-    background-color: var(--color-acento1); border-radius: 8px; 
-    width: 100px; height: 100px; line-height: 100px;
-    margin-right: 20px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+.date-calendar { 
+    border: none; padding: 0; margin: 40px auto; box-shadow: none; 
+    background-color: transparent; max-width: 400px;
+    /* CENTRADO FLEX */
+    display: flex; flex-direction: column; align-items: center;
 }
-.day-name { font-size: 1.8em; color: var(--color-acento1); }
 
-/* CUENTA REGRESIVA - NO HAY ESTILOS ESPECÍFICOS AQUÍ POR EL IFRAME */
+.day-wrapper {
+    display: flex; 
+    align-items: center; /* Alineación vertical */
+    gap: 20px; /* Espacio entre Sábado y 6 */
+}
+
+.day-name { 
+    font-size: 1.8em; 
+    color: var(--color-acento1);
+    font-weight: 400; /* Ligeramente más delgado */
+}
+
+.day-number {
+    font-size: 5em; 
+    font-weight: 700; 
+    color: white;
+    background-color: var(--color-acento1); 
+    border-radius: 8px; 
+    width: 100px; 
+    height: 100px; 
+    line-height: 100px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.month { 
+    font-size: 1.5em; 
+    color: var(--color-acento2); 
+    font-weight: 400; 
+    margin-top: 15px; /* Espacio entre la fecha y el mes/año */
+}
+
 
 /* BOTONES DE ACCIÓN (Modernos, tipo píldora) */
 .button-group {
@@ -178,7 +205,7 @@ h1, h2 { font-weight: 700; line-height: 1.1; }
 .btn:hover { transform: translateY(-2px) scale(1.02); box-shadow: 0 8px 15px rgba(0, 0, 0, 0.25); }
 
 
-/* --- SCROLL REVEAL Y FLIP ANIMATION (ELIMINADO EL FLIP) --- */
+/* --- SCROLL REVEAL --- */
 .reveal-item { opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
 .reveal-item.active { opacity: 1; transform: translateY(0); }
 
