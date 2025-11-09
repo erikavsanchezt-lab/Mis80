@@ -51,8 +51,6 @@ body {
     margin: 0 auto; 
     border: none;
     box-shadow: none;
-    height: 140px; /* Aumentamos ligeramente la altura para evitar el corte vertical */
-    min-height: 100px; /* Asegura una altura mínima */
 }
 
 /* --- TIPOGRAFÍA Y JERARQUÍA --- (sin cambios) */
