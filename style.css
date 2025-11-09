@@ -63,7 +63,7 @@ body {
     border: none;
     box-shadow: none;
     
-    /* CAMBIO SOLICITADO */
+    /* ALTURA DE 200PX CONFIRMADA */
     height: 200px !important; 
     overflow: visible !important; 
     
@@ -146,7 +146,7 @@ h1, h2 { font-weight: 700; line-height: 1.1; }
     cursor: pointer; transition: color 0.3s; z-index: 1001;
 }
 
-/* --- OVERLAY DE MÚSICA (Los estilos se mantienen, pero el elemento está comentado en HTML) --- */
+/* --- OVERLAY DE MÚSICA RESTAURADO --- */
 #welcome-overlay {
     position: fixed; 
     top: 0; 
@@ -242,12 +242,12 @@ h1, h2 { font-weight: 700; line-height: 1.1; }
 }
 
 
-/* BOTONES DE ACCIÓN (Corregido para asegurar los estilos) */
+/* BOTONES DE ACCIÓN (Fix para evitar color púrpura) */
 .button-group {
     margin-top: 40px; gap: 20px; display: flex; justify-content: center; flex-wrap: wrap;
 }
 .btn {
-    /* Corregido: Fuerzo el color blanco y elimino subrayado para evitar el estilo púrpura */
+    /* CRÍTICO: FUERZA el color blanco y elimina subrayado, evitando el color de enlace púrpura */
     color: white !important; 
     text-decoration: none !important; 
     
