@@ -12,7 +12,6 @@ let musicStarted = false;
 function startMusicAndHideOverlay() {
     
     // --- PASO 1: CIERRE INMEDIATO DEL OVERLAY ---
-    // Esto debe ejecutarse primero y sin condiciones para garantizar la UX.
     if (overlay) {
         overlay.classList.add('hidden-overlay');
     }
