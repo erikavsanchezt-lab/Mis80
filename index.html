@@ -6,12 +6,21 @@
     <title>Flor María — 80 años</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     
-    <link rel="stylesheet" href="style.css?v=1.1.5"> 
+    <link rel="stylesheet" href="style.css?v=1.1.6"> 
     
     <script src="https://cdn.logwork.com/widget/countdown.js"></script> 
 
 </head>
 <body>
+
+    <button id="welcome-overlay" aria-label="Toca para iniciar"> 
+        <p>Toca o haz click para entrar y activar la música 🎶</p>
+    </button>
+
+    <audio id="background-music" loop>
+        <source src="https://files.catbox.moe/yogpbx.mp3" type="audio/mp3">
+        Tu navegador no soporta el elemento de audio.
+    </audio>
 
     <nav class="navbar">
         <button id="menu-toggle" class="menu-toggle" aria-label="Abrir menú">
