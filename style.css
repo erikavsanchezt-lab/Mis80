@@ -1,8 +1,8 @@
 /* Paleta de Colores y Tipografía */
 :root {
-    --color-fondo: #F5F5DC; /* Base de color Crema/Beige */
-    --color-acento1: #B06575; /* Rosado/Maroon (Primario: Fuerte) */
-    --color-acento2: #6D8B74; /* Verde Muted/Salvia (Secundario: Suave) */
+    --color-fondo: #F5F5DC; 
+    --color-acento1: #B06575; 
+    --color-acento2: #6D8B74; 
     --color-texto: #444444; 
     --color-light-bg: #FFFFFF; 
     --color-dorado: #D4AF37;
@@ -19,7 +19,7 @@ body {
     font-size: 18px; 
     
     background-color: var(--color-fondo); 
-    background-image: url('https://raw.githubusercontent.com/erikavsanchezt-lab/Mis80/main/img/Fondo2.png'); /* Textura sutil */
+    background-image: url('https://raw.githubusercontent.com/erikavsanchezt-lab/Mis80/main/img/Fondo2.png'); 
     background-repeat: no-repeat;
     background-size: cover; 
     background-position: center center; 
@@ -32,7 +32,16 @@ body {
     margin: 0 auto;
 }
 
-/* --- FIX PARA WIDGET DE CUENTA REGRESIVA (RESPONSIVO Y VISUAL) --- */
+/* --- FIX PARA WIDGET DE CUENTA REGRESIVA (FINAL) --- */
+
+/* Contenedor padre de Logwork, permitimos que el contenido se vea */
+#countdown-wrapper {
+    margin: 20px auto 40px; 
+    text-align: center;
+    overflow: visible !important; /* Importante: Permitir desbordamiento */
+    padding: 0;
+    line-height: normal; 
+}
 
 /* La etiqueta <a> que contiene el widget */
 .countdown-timer {
@@ -41,14 +50,11 @@ body {
     display: block; 
     text-decoration: none !important; 
     margin: 0 auto; 
-    overflow: hidden; 
+    overflow: visible !important; /* Importante: Permitir desbordamiento */
 }
 
-/* FIX CRÍTICO: Asegura que el iframe (donde se dibuja el widget) no se vea afectado. 
-   Usaremos una altura mínima generosa y forzaremos el display y overflow. */
+/* FIX CRÍTICO: El iframe (donde se dibuja el contador) */
 #countdown-wrapper iframe {
-    /* No usamos 'all: initial' aquí para ver si eso era demasiado restrictivo */
-    
     width: 100% !important;
     max-width: 100% !important;
     display: block; 
@@ -56,11 +62,9 @@ body {
     border: none;
     box-shadow: none;
     
-    /* SOLUCIÓN DE ALTURA MÁS AGRESIVA: Definir altura fija para el iframe */
     height: 150px !important; /* Altura generosa forzada */
-    overflow: hidden !important; /* Esconder cualquier desborde que no sea parte del diseño */
+    overflow: visible !important; /* ¡Lo más importante aquí para evitar el corte! */
     
-    /* Asegurar que la caja base del iframe no tenga paddings/márgenes extraños */
     padding: 0 !important;
     box-sizing: content-box !important;
 }
