@@ -32,7 +32,9 @@ body {
     margin: 0 auto;
 }
 
-/* --- FIX PARA WIDGET DE CUENTA REGRESIVA (RESPONSIVO) --- */
+/* --- FIX PARA WIDGET DE CUENTA REGRESIVA (RESPONSIVO Y VISUAL) --- */
+
+/* La etiqueta <a> que contiene el widget */
 .countdown-timer {
     width: 100% !important; 
     max-width: 900px; 
@@ -42,16 +44,27 @@ body {
     overflow: hidden; 
 }
 
-/* FIX CRÍTICO: Asegura que el iframe (donde se dibuja el widget) no se vea afectado */
+/* FIX CRÍTICO: Asegura que el iframe (donde se dibuja el widget) no se vea afectado. 
+   Usaremos una altura mínima generosa y forzaremos el display y overflow. */
 #countdown-wrapper iframe {
-    all: initial; /* Resetea la mayoría de los estilos CSS que podrían interferir */
+    /* No usamos 'all: initial' aquí para ver si eso era demasiado restrictivo */
+    
     width: 100% !important;
     max-width: 100% !important;
     display: block; 
     margin: 0 auto; 
     border: none;
     box-shadow: none;
+    
+    /* SOLUCIÓN DE ALTURA MÁS AGRESIVA: Definir altura fija para el iframe */
+    height: 150px !important; /* Altura generosa forzada */
+    overflow: hidden !important; /* Esconder cualquier desborde que no sea parte del diseño */
+    
+    /* Asegurar que la caja base del iframe no tenga paddings/márgenes extraños */
+    padding: 0 !important;
+    box-sizing: content-box !important;
 }
+
 
 /* --- TIPOGRAFÍA Y JERARQUÍA --- (sin cambios) */
 h1, h2 { font-weight: 700; line-height: 1.1; }
@@ -214,8 +227,8 @@ h1, h2 { font-weight: 700; line-height: 1.1; }
     margin-top: 40px; gap: 20px; display: flex; justify-content: center; flex-wrap: wrap;
 }
 .btn {
-    /* Reinicia estilos de anclaje que puedan venir del navegador (ej: color púrpura) */
-    color: white !important; /* Forzar color blanco del texto del botón */
+    /* Corregido: Fuerzo el color blanco y elimino subrayado para evitar el estilo púrpura */
+    color: white !important; 
     text-decoration: none !important; 
     
     padding: 12px 30px; 
